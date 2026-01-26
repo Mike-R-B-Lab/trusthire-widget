@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
-import path from 'path'
-import { promises as fs } from 'fs'
+
+// Forces the route to be dynamic and not static optimized, ensuring the import runs at request time
+export const dynamic = 'force-dynamic'
 
 export async function GET(
     request: Request,
@@ -9,17 +10,12 @@ export async function GET(
     const slug = params.slug
 
     try {
-        // Construct path to the JSON file
-        // Note: process.cwd() returns the root of the project where package.json is
-        // We expect data to be in web/data/[slug].json if running from root,
-        // but depending on how nextjs runs, process.cwd() is usually the specific app dir or project root.
-        // Let's try finding it relative to process.cwd()
-        const jsonDirectory = path.join(process.cwd(), 'data')
-        const fileContents = await fs.readFile(jsonDirectory + `/${slug}.json`, 'utf8')
+        // Dynamic import of the JSON file
+        // Webpack will identify this pattern and bundle the files in @/data/
+        const data = await import(`@/data/${slug}.json`)
 
-        const data = JSON.parse(fileContents)
-
-        return NextResponse.json(data)
+        // Return the JSON content (handled by default export in some bundlers or direct module)
+        return NextResponse.json(data.default || data)
     } catch (error) {
         console.error('Error reading data file:', error)
         return NextResponse.json(
