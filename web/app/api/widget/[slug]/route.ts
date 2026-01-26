@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server'
 
-// Forces the route to be dynamic and not static optimized, ensuring the import runs at request time
+// Static import ensures the data is bundled into the serverless function
+import demoData from '@/data/demo.json'
+
+// Forces the route to be dynamic to handle the [slug] param correctly
 export const dynamic = 'force-dynamic'
 
 export async function GET(
@@ -9,15 +12,16 @@ export async function GET(
 ) {
     const slug = params.slug
 
-    try {
-        // Dynamic import of the JSON file
-        // Webpack will identify this pattern and bundle the files in @/data/
-        const data = await import(`@/data/${slug}.json`)
+    // Simple lookup map
+    const dataMap: Record<string, any> = {
+        'demo': demoData
+    }
 
-        // Return the JSON content (handled by default export in some bundlers or direct module)
-        return NextResponse.json(data.default || data)
-    } catch (error) {
-        console.error('Error reading data file:', error)
+    const data = dataMap[slug]
+
+    if (data) {
+        return NextResponse.json(data)
+    } else {
         return NextResponse.json(
             { error: 'Business not found' },
             { status: 404 }
