@@ -164,11 +164,20 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
 
     const handleOpen = () => {
         setIsOpen(true)
+        window.parent.postMessage({ type: 'trusthire-resize', state: 'fullscreen' }, '*')
     }
 
     const handleClose = () => {
         setIsClosed(true)
+        window.parent.postMessage({ type: 'trusthire-resize', state: 'closed' }, '*')
     }
+
+    useEffect(() => {
+        // Notify parent that widget is ready and minimized
+        if (!isOpen && !isClosed) {
+            window.parent.postMessage({ type: 'trusthire-resize', state: 'minimized' }, '*')
+        }
+    }, [isOpen, isClosed])
 
     if (isClosed) {
         return null
