@@ -270,7 +270,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                                 </div>
 
                                 {featuredReviews.length > 0 && (
-                                    <div className="mt-0 relative border-t border-gray-200 pt-1">
+                                    <div className="mt-0 relative pt-1">
                                         {/* Left Arrow */}
                                         {featuredReviews.length > 1 && (
                                             <button
