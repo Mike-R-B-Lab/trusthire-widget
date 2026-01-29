@@ -78,6 +78,7 @@ export function ReviewRow({ id, platform, rating, count, color, url, reviews, cu
                     )}
                 </div>
             </div>
+
         </div>
     )
 }

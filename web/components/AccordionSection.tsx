@@ -12,6 +12,8 @@ interface AccordionSectionProps {
     defaultOpen?: boolean
     verified?: boolean
     onToggle?: (isOpen: boolean) => void
+    scrollAnchor?: ScrollLogicalPosition
+    scrollTarget?: 'section' | 'content'
 }
 
 export function AccordionSection({
@@ -21,18 +23,22 @@ export function AccordionSection({
     children,
     defaultOpen = false,
     verified = false,
-    onToggle
+    onToggle,
+    scrollAnchor = 'center',
+    scrollTarget = 'section'
 }: AccordionSectionProps) {
     const [isOpen, setIsOpen] = useState(defaultOpen)
     const sectionRef = useRef<HTMLDivElement>(null)
+    const contentRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         if (isOpen && sectionRef.current) {
             // Small delay to allow the accordion to start opening
             setTimeout(() => {
-                sectionRef.current?.scrollIntoView({
+                const targetRef = scrollTarget === 'content' ? contentRef : sectionRef
+                targetRef.current?.scrollIntoView({
                     behavior: 'smooth',
-                    block: 'start'
+                    block: scrollAnchor
                 })
             }, 400)
         }
@@ -79,7 +85,10 @@ export function AccordionSection({
                     }`}
             >
                 <div className="overflow-hidden">
-                    <div className="bg-white border-t border-gray-100 p-2.5">
+                    <div
+                        ref={contentRef}
+                        className="bg-white border-t border-gray-100 px-2.5 pb-2.5 pt-[5px]"
+                    >
                         {children}
                     </div>
                 </div>

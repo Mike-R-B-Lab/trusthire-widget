@@ -5,7 +5,7 @@
   "owners": "Lucas Khuong & Zachary Masse",
   "serviceArea": "Quebec City and surronding areas",
   "incorporationNumber": "3380462831",
-  "warranty": "3 years (vertically painted)",
+  "warranty": "3-year warranty (vertical painted items)",
   "insuredAmount": "$2,000,000",
   "socialPosts": [
     {
@@ -23,22 +23,14 @@
   ],
   "featuredReviews": [
     {
-      "id": "3",
-      "author": "Michael L.",
-      "rating": 5,
-      "date": "3 weeks ago",
-      "content": "Incroyable travail sur ma façade extérieure!",
-      "source": "Google"
-    },
-    {
       "id": "1",
       "author": "Léa Delisle",
       "rating": 5,
       "date": "1 week ago",
       "content": "Embedded Review",
       "embedUrl": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Flea.delisle.52%2Fposts%2Fpfbid0DVme6GLpdeXVubhpyzVHjgfKrYVhiSntQmtDDsaKrUyXbmibcm2Z3smJ5VsfYig2l&show_text=true&width=390",
-      "embedHeight": 194,
-      "embedScale": 0.8
+      "embedHeight": 170,
+      "embedScale": 1
     },
     {
       "id": "2",
@@ -47,16 +39,8 @@
       "date": "2 weeks ago",
       "content": "Embedded Review",
       "embedUrl": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fcaroline.pelle.75%2Fposts%2Fpfbid02tUxw2WsQvx6UAUcR6tENX23w26B1jeQLYjURQhNVNPKWrJnZhhL4eLiaksSCS94Wl&show_text=true&width=390",
-      "embedHeight": 210,
-      "embedScale": 0.8
-    },
-    {
-      "id": "4",
-      "author": "William",
-      "rating": 5,
-      "date": "1 month ago",
-      "content": "Des jeunes hommes compétents et travaillants.",
-      "source": "Google"
+      "embedHeight": 194,
+      "embedScale": 1
     }
   ],
   "projects": [

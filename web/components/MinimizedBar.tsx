@@ -1,19 +1,30 @@
-import { ArrowRight, ShieldCheck } from 'lucide-react'
+import { ArrowRight, ShieldCheck, X } from 'lucide-react'
 
 interface MinimizedBarProps {
     onOpen: () => void
+    onClose: () => void
 }
 
-export function MinimizedBar({ onOpen }: MinimizedBarProps) {
+export function MinimizedBar({ onOpen, onClose }: MinimizedBarProps) {
     return (
-        <button
-            onClick={onOpen}
-            className="w-fit min-w-[180px] bg-white shadow-xl cursor-pointer rounded-t-lg overflow-hidden border-t border-x border-gray-100 flex flex-col items-center py-1 gap-0.5 transition-none px-2 scale-105 origin-bottom-right"
+        <div
+            className="w-fit min-w-[200px] bg-white shadow-xl rounded-lg border border-gray-100 flex flex-col items-center pt-[12px] pb-[16px] px-[14px] gap-2 scale-105 origin-bottom-right relative"
         >
+            {/* Close Button */}
+            <button
+                onClick={(e) => {
+                    e.stopPropagation()
+                    onClose()
+                }}
+                className="absolute top-[-1px] right-[-1px] p-1 text-gray-400 hover:text-gray-600 transition-colors z-50 rounded-full"
+            >
+                <X size={12} strokeWidth={2.5} />
+            </button>
+
             {/* Top row: Text + Icon */}
             <div className="flex items-center justify-center gap-1.5 w-full">
                 {/* Text */}
-                <span className="text-[13px] text-black leading-none whitespace-nowrap">
+                <span className="text-[13.5px] text-black leading-none whitespace-nowrap">
                     Verified by <span className="font-bold">TrustHire</span>
                 </span>
 
@@ -29,11 +40,14 @@ export function MinimizedBar({ onOpen }: MinimizedBarProps) {
 
             {/* Bottom row: Button */}
             <div className="w-full">
-                <div className="bg-[#32BD5E] rounded-md py-0.5 flex items-center gap-1 justify-center w-full shadow-sm">
-                    <span className="text-[10px] font-medium text-white leading-none">View business summary</span>
-                    <ArrowRight size={10} className="text-white" />
-                </div>
+                <button
+                    onClick={onOpen}
+                    className="bg-[#32BD5E] hover:bg-[#2ca652] transition-colors rounded-md py-2.5 flex items-center gap-1.5 justify-center w-full shadow-sm cursor-pointer"
+                >
+                    <span className="text-[11px] font-medium text-white leading-none">View business summary</span>
+                    <ArrowRight size={12} className="text-white" />
+                </button>
             </div>
-        </button>
+        </div>
     )
 }

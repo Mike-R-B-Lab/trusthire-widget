@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo, useCallback } from 'react'
 import { WidgetHeader } from './WidgetHeader'
 import { AccordionSection } from './AccordionSection'
 import { ProjectCard } from './ProjectCard'
@@ -8,7 +8,7 @@ import { MinimizedBar } from './MinimizedBar'
 import { LicenseTab } from './LicenseTab'
 import { ReviewRow, type Review } from './ReviewRow'
 import type { Project } from '../types'
-import { Star, Briefcase, Shield, Video, Info, Building2, ChevronDown, X, Play } from 'lucide-react'
+import { Star, Briefcase, Shield, Info, Building2, ChevronDown, ChevronLeft, ChevronRight, X, Smartphone, Share2 } from 'lucide-react'
 
 
 
@@ -23,6 +23,36 @@ interface PlatformData {
     customRating?: string
 }
 
+interface FeaturedReview {
+    id: string
+    author: string
+    rating: number
+    date: string
+    content: string
+    embedUrl?: string
+    embedHeight?: number
+    embedScale?: number
+    source?: string
+}
+
+interface BusinessInfo {
+    name: string
+    foundedYear?: string
+    onTrustHireSince?: string
+    owners?: string
+    serviceArea?: string
+    incorporationNumber?: string
+    warranty?: string
+    insuredAmount?: string
+}
+
+interface SocialPost {
+    url: string
+    height?: number
+    containerHeight?: number
+    marginTop?: number
+}
+
 interface TrustHireWidgetProps {
     slug: string
 }
@@ -33,10 +63,52 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
     const [reviews, setReviews] = useState<PlatformData[]>([])
     const [loading, setLoading] = useState(true)
     const [visibleProjects, setVisibleProjects] = useState(2)
+    const [visiblePosts, setVisiblePosts] = useState(1)
+    const [businessInfo, setBusinessInfo] = useState<BusinessInfo>({ name: '' })
+    const [featuredReviews, setFeaturedReviews] = useState<FeaturedReview[]>([])
+    const [socialPosts, setSocialPosts] = useState<SocialPost[]>([])
+    const [currentPostIndex, setCurrentPostIndex] = useState(0)
+    const [currentReviewIndex, setCurrentReviewIndex] = useState(0)
+    const [hasPlayedAnimation, setHasPlayedAnimation] = useState(false)
+    const [isClosed, setIsClosed] = useState(false)
 
     const handleLoadMoreProjects = () => {
         setVisibleProjects(prev => prev + 2)
     }
+
+    const handlePrevPost = (e: React.MouseEvent) => {
+        e.stopPropagation()
+        setCurrentPostIndex((prev) => (prev === 0 ? socialPosts.length - 1 : prev - 1))
+    }
+
+    const handleNextPost = (e: React.MouseEvent) => {
+        e.stopPropagation()
+        setCurrentPostIndex((prev) => (prev === socialPosts.length - 1 ? 0 : prev + 1))
+    }
+
+    const handlePrevReview = () => {
+        setCurrentReviewIndex((prev) => (prev === 0 ? featuredReviews.length - 1 : prev - 1))
+    }
+
+    const handleNextReview = () => {
+        setCurrentReviewIndex((prev) => (prev === featuredReviews.length - 1 ? 0 : prev + 1))
+    }
+
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setHasPlayedAnimation(true)
+        }, 2200) // Match animation delay (1s) + duration (1s) + buffer
+        return () => clearTimeout(timer)
+    }, [])
+
+    const handleSocialToggle = useCallback((isOpen: boolean) => {
+        if (!isOpen) {
+            setVisiblePosts(1)
+        }
+    }, [])
+
+
 
     useEffect(() => {
         async function fetchData() {
@@ -58,6 +130,25 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                 if (data.reviews) {
                     setReviews(data.reviews)
                 }
+
+                setBusinessInfo({
+                    name: data.companyName || '',
+                    foundedYear: data.foundedYear,
+                    onTrustHireSince: data.onTrustHireSince,
+                    owners: data.owners,
+                    serviceArea: data.serviceArea,
+                    incorporationNumber: data.incorporationNumber,
+                    warranty: data.warranty,
+                    insuredAmount: data.insuredAmount
+                })
+
+                if (data.featuredReviews) {
+                    setFeaturedReviews(data.featuredReviews)
+                }
+
+                if (data.socialPosts) {
+                    setSocialPosts(data.socialPosts)
+                }
             } catch (err) {
                 console.error('Fetch error:', err)
                 // Fallback to empty states or could show an error message
@@ -75,10 +166,21 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
         setIsOpen(true)
     }
 
+    const handleClose = () => {
+        setIsClosed(true)
+    }
+
+    if (isClosed) {
+        return null
+    }
+
     if (!isOpen) {
         return (
-            <div className="fixed bottom-0 right-6 z-50">
-                <MinimizedBar onOpen={handleOpen} />
+            <div
+                className={`fixed bottom-6 right-6 z-50 ${!hasPlayedAnimation ? 'animate-slide-in-from-right' : ''}`}
+                style={!hasPlayedAnimation ? { animationDelay: '1s', animationFillMode: 'both' } : {}}
+            >
+                <MinimizedBar onOpen={handleOpen} onClose={handleClose} />
             </div>
         )
     }
@@ -94,7 +196,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
             {/* Centered modal */}
             <main className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
                 <div
-                    className="w-full max-w-[440px] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh] animate-in zoom-in-95 fade-in duration-300 pointer-events-auto"
+                    className="w-full max-w-[440px] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[calc(85vh+25px)] animate-in zoom-in-95 fade-in duration-300 pointer-events-auto"
                     onClick={(e) => e.stopPropagation()}
                 >
                     {/* White band strip at top with Verified by TrustHire - sticky on scroll */}
@@ -122,7 +224,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
 
                     {/* Scrollable content area - includes header and accordions */}
                     <div className="flex-1 overflow-y-auto bg-white">
-                        <WidgetHeader onClose={() => setIsOpen(false)} />
+                        <WidgetHeader onClose={() => setIsOpen(false)} businessName={businessInfo.name} />
 
                         <div className="px-3 pt-1 pb-3 space-y-2">
                             {/* Reviews Accordion */}
@@ -149,64 +251,206 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                                         <p className="text-gray-500 text-sm py-2">No reviews found.</p>
                                     )}
                                 </div>
-                            </AccordionSection>
 
-                            {/* Past Work Accordion */}
-                            <AccordionSection
-                                title="Previous Projects"
-                                icon={<Briefcase className="text-[#32BD5E]" size={20} />}
-                                verified={true}
-                                onToggle={(isOpen) => {
-                                    if (!isOpen) {
-                                        setVisibleProjects(2)
-                                    }
-                                }}
-                            >
-                                <div className="space-y-4">
-                                    {projects.slice(0, visibleProjects).map((project) => (
-                                        <ProjectCard key={project.id} project={project} />
-                                    ))}
-
-                                    {projects.length === 0 && !loading && (
-                                        <p className="text-gray-500 text-sm py-2 text-center">No projects available.</p>
-                                    )}
-
-                                    {visibleProjects < projects.length && (
-                                        <div className="flex justify-center py-px">
+                                {featuredReviews.length > 0 && (
+                                    <div className="mt-1 relative border-t border-gray-100 pt-1">
+                                        {/* Left Arrow */}
+                                        {featuredReviews.length > 1 && (
                                             <button
-                                                onClick={handleLoadMoreProjects}
-                                                className="text-xs font-medium text-[#32BD5E] hover:text-[#32BD5E] transition-colors"
+                                                onClick={handlePrevReview}
+                                                className="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-100 p-1.5 rounded-full hover:bg-gray-200 text-gray-600 transition-colors z-10"
                                             >
-                                                View more projects
+                                                <ChevronLeft size={20} />
                                             </button>
+                                        )}
+
+
+                                        <div className="h-[160px] relative overflow-hidden">
+                                            {featuredReviews[currentReviewIndex].embedUrl ? (
+                                                <div className="flex justify-center overflow-hidden px-[20px]">
+                                                    <iframe
+                                                        src={featuredReviews[currentReviewIndex].embedUrl}
+                                                        width="100%"
+                                                        height={featuredReviews[currentReviewIndex].embedHeight || 194}
+                                                        style={{
+                                                            border: 'none',
+                                                            overflow: 'hidden',
+                                                            borderRadius: '12px',
+                                                            maxWidth: 'none',
+                                                            transform: `scale(${featuredReviews[currentReviewIndex].embedScale || 0.85})`,
+                                                            transformOrigin: 'center top',
+                                                            marginBottom: '-35px'
+                                                        }}
+                                                        scrolling="no"
+                                                        frameBorder="0"
+                                                        allowFullScreen={true}
+                                                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                                                    />
+                                                </div>
+                                            ) : (
+                                                <div className="flex justify-center overflow-hidden px-[20px]">
+                                                    <div
+                                                        style={{
+                                                            transform: 'scale(0.8)',
+                                                            transformOrigin: 'center top',
+                                                            marginBottom: '-10px',
+                                                            width: '100%'
+                                                        }}
+                                                    >
+                                                        <div className="bg-white border-2 border-gray-300 rounded-lg p-3 h-[190px] flex flex-col">
+                                                            {/* Header with avatar, name, date, and Google logo */}
+                                                            <div className="flex items-start justify-between mb-3">
+                                                                <div className="flex items-center gap-2">
+                                                                    {/* Purple avatar circle with initial */}
+                                                                    <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                                                                        {featuredReviews[currentReviewIndex].author.charAt(0)}
+                                                                    </div>
+                                                                    <div>
+                                                                        <div className="font-medium text-sm text-gray-900">
+                                                                            {featuredReviews[currentReviewIndex].author}
+                                                                        </div>
+                                                                        <div className="text-xs text-gray-500">
+                                                                            {featuredReviews[currentReviewIndex].date}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                {/* Google logo */}
+                                                                {featuredReviews[currentReviewIndex].source === 'Google' && (
+                                                                    <svg className="w-6 h-6 flex-shrink-0" viewBox="0 0 48 48">
+                                                                        <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z" />
+                                                                        <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z" />
+                                                                        <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z" />
+                                                                        <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z" />
+                                                                    </svg>
+                                                                )}
+                                                            </div>
+
+                                                            {/* Gold stars */}
+                                                            <div className="flex gap-0.5 mb-3">
+                                                                {[...Array(5)].map((_, i) => (
+                                                                    <svg key={i} className="w-4 h-4" viewBox="0 0 24 24" fill="#FDB022">
+                                                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                                                    </svg>
+                                                                ))}
+                                                            </div>
+
+                                                            {/* Review text */}
+                                                            <p className="text-sm leading-relaxed text-gray-700 flex-1">
+                                                                {featuredReviews[currentReviewIndex].content}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+
+
+                                        {/* Right Arrow */}
+                                        {featuredReviews.length > 1 && (
+                                            <button
+                                                onClick={handleNextReview}
+                                                className="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-100 p-1.5 rounded-full hover:bg-gray-200 text-gray-600 transition-colors z-10"
+                                            >
+                                                <ChevronRight size={20} />
+                                            </button>
+                                        )}
+
+
+
+                                        {/* Carousel Dots */}
+                                        <div className="flex justify-center gap-2 mt-2">
+                                            {featuredReviews.map((_, index) => (
+                                                <button
+                                                    key={index}
+                                                    onClick={() => setCurrentReviewIndex(index)}
+                                                    className={`w-2 h-2 rounded-full transition-colors ${index === currentReviewIndex ? 'bg-[#32BD5E]' : 'bg-gray-300 hover:bg-gray-400'}`}
+                                                    aria-label={`Go to review ${index + 1}`}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </AccordionSection>
+
+                            {/* Social Posts Accordion */}
+                            <AccordionSection
+                                title="Social Posts"
+                                icon={<Share2 className="text-[#32BD5E]" size={20} />}
+                                verified={true}
+                                onToggle={handleSocialToggle}
+                                scrollAnchor="start"
+                                scrollTarget="content"
+                            >
+                                <div className="space-y-0 relative group">
+                                    {socialPosts.length > 0 ? (
+                                        <>
+                                            <div className="relative">
+                                                <div
+                                                    key={currentPostIndex}
+                                                    style={{
+                                                        height: socialPosts[currentPostIndex].containerHeight ? `${socialPosts[currentPostIndex].containerHeight}px` : undefined,
+                                                        overflow: 'hidden'
+                                                    }}
+                                                >
+                                                    <iframe
+                                                        src={socialPosts[currentPostIndex].url}
+                                                        width="100%"
+                                                        height={socialPosts[currentPostIndex].height || 725}
+                                                        style={{
+                                                            border: 'none',
+                                                            overflow: 'hidden',
+                                                            marginTop: socialPosts[currentPostIndex].marginTop ? `${socialPosts[currentPostIndex].marginTop}px` : undefined
+                                                        }}
+                                                        scrolling="no"
+                                                        frameBorder="0"
+                                                        allowFullScreen={true}
+                                                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                                                    />
+                                                </div>
+
+                                                {/* Navigation Arrows */}
+                                                {currentPostIndex > 0 && (
+                                                    <button
+                                                        onClick={handlePrevPost}
+                                                        className="absolute left-2 top-1/2 -translate-y-1/2 bg-gray-100 p-1.5 rounded-full hover:bg-gray-200 text-gray-600 transition-colors z-10 backdrop-blur-sm"
+                                                    >
+                                                        <ChevronLeft size={20} />
+                                                    </button>
+                                                )}
+
+                                                {currentPostIndex < socialPosts.length - 1 && (
+                                                    <button
+                                                        onClick={handleNextPost}
+                                                        className="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-100 p-1.5 rounded-full hover:bg-gray-200 text-gray-600 transition-colors z-10 backdrop-blur-sm"
+                                                    >
+                                                        <ChevronRight size={20} />
+                                                    </button>
+                                                )}
+                                            </div>
+
+                                            {/* Carousel Dots */}
+                                            <div className="flex justify-center gap-2 mt-2">
+                                                {socialPosts.map((_, index) => (
+                                                    <button
+                                                        key={index}
+                                                        onClick={() => setCurrentPostIndex(index)}
+                                                        className={`w-2 h-2 rounded-full transition-colors ${index === currentPostIndex ? 'bg-[#32BD5E]' : 'bg-gray-300 hover:bg-gray-400'}`}
+                                                        aria-label={`Go to post ${index + 1}`}
+                                                    />
+                                                ))}
+                                            </div>
+
+
+                                        </>
+                                    ) : (
+                                        <div className="text-center py-8 text-gray-500 text-sm">
+                                            No posts available
                                         </div>
                                     )}
                                 </div>
                             </AccordionSection>
 
-                            {/* Recorded Work Accordion */}
-                            <AccordionSection
-                                title="Recorded Work"
-                                icon={<Video className="text-[#32BD5E]" size={20} />}
-                                verified={true}
-                            >
-                                <div className="pb-2 last:pb-1">
-                                    <div className="relative w-[90%] mx-auto aspect-video rounded-lg overflow-hidden shrink-0 bg-gray-100 flex items-center justify-center group mb-2 border border-gray-100">
-                                        <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-lg transition-transform group-hover:scale-110 cursor-pointer">
-                                            <Play size={20} className="text-[#32BD5E] ml-1 fill-[#32BD5E]" />
-                                        </div>
-                                    </div>
 
-                                    <div className="flex flex-col items-center text-center gap-0.5">
-                                        <p className="text-[10px] text-gray-900">
-                                            <span className="font-bold">Site Walkthrough</span> - Montreal, QC
-                                        </p>
-                                        <p className="text-[10px] text-gray-500">
-                                            Oct 2023
-                                        </p>
-                                    </div>
-                                </div>
-                            </AccordionSection>
 
                             {/* Credentials & Insurance Accordion */}
                             <AccordionSection
@@ -214,7 +458,11 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                                 icon={<Shield className="text-[#32BD5E]" size={20} />}
                                 verified={true}
                             >
-                                <LicenseTab />
+                                <LicenseTab
+                                    incorporationNumber={businessInfo.incorporationNumber}
+                                    warranty={businessInfo.warranty}
+                                    insuredAmount={businessInfo.insuredAmount}
+                                />
                             </AccordionSection>
 
                             {/* About the Business Accordion */}
@@ -223,15 +471,15 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                                 icon={<Building2 className="text-[#32BD5E]" size={20} />}
                                 verified={true}
                             >
-                                <div className="grid grid-cols-2 gap-2">
+                                <div className="grid grid-cols-3 gap-2">
                                     <div className="bg-gray-50 rounded-lg p-2 border border-gray-100">
                                         <p className="text-[10px] text-gray-500 mb-0.5">Founded Year</p>
-                                        <p className="font-semibold text-sm text-gray-900">2009</p>
+                                        <p className="font-semibold text-sm text-gray-900">{businessInfo.foundedYear || '2009'}</p>
                                     </div>
 
                                     <div className="bg-gray-50 rounded-lg p-2 border border-gray-100">
                                         <p className="text-[10px] text-gray-500 mb-0.5">On TrustHire Since</p>
-                                        <p className="font-semibold text-sm text-gray-900">2024</p>
+                                        <p className="font-semibold text-sm text-gray-900">{businessInfo.onTrustHireSince || '2024'}</p>
                                     </div>
 
                                     <div className="bg-gray-50 rounded-lg p-2 border border-gray-100">
@@ -239,15 +487,23 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                                         <p className="font-semibold text-sm text-gray-900">12-15</p>
                                     </div>
 
-                                    <div className="bg-gray-50 rounded-lg p-2 border border-gray-100">
-                                        <p className="text-[10px] text-gray-500 mb-0.5">Owner</p>
-                                        <p className="font-semibold text-sm text-gray-900">Jean Tremblay</p>
-                                    </div>
+                                    {businessInfo.owners && (
+                                        <div className="col-span-3 bg-gray-50 rounded-lg p-2 border border-gray-100">
+                                            <p className="text-[10px] text-gray-500 mb-0.5">
+                                                Owner{businessInfo.owners.match(/(&|and|et)/i) ? 's' : ''}
+                                            </p>
+                                            <p className="font-semibold text-sm text-gray-900">{businessInfo.owners}</p>
+                                        </div>
+                                    )}
 
-                                    <div className="bg-gray-50 rounded-lg p-2 border border-gray-100 col-span-2">
-                                        <p className="text-[10px] text-gray-500 mb-0.5">Service Area</p>
-                                        <p className="font-semibold text-sm text-gray-900">Greater Montreal, Laval, and surrounding areas</p>
-                                    </div>
+                                    {businessInfo.serviceArea && (
+                                        <div className="col-span-3 bg-gray-50 rounded-lg p-2 border border-gray-100">
+                                            <p className="text-[10px] text-gray-500 mb-0.5">Service Area</p>
+                                            <p className="font-semibold text-sm text-gray-900">{businessInfo.serviceArea}</p>
+                                        </div>
+                                    )}
+
+
                                 </div>
                             </AccordionSection>
 
