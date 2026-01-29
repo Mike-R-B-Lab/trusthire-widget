@@ -52,7 +52,7 @@
       "date": "1 week ago",
       "content": "Embedded Review",
       "embedUrl": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Flea.delisle.52%2Fposts%2Fpfbid0DVme6GLpdeXVubhpyzVHjgfKrYVhiSntQmtDDsaKrUyXbmibcm2Z3smJ5VsfYig2l&show_text=true&width=390",
-      "embedHeight": 194,
+      "embedHeight": 500,
       "embedScale": 0.8
     },
     {
@@ -62,7 +62,7 @@
       "date": "2 weeks ago",
       "content": "Embedded Review",
       "embedUrl": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fcaroline.pelle.75%2Fposts%2Fpfbid02tUxw2WsQvx6UAUcR6tENX23w26B1jeQLYjURQhNVNPKWrJnZhhL4eLiaksSCS94Wl&show_text=true&width=390",
-      "embedHeight": 210,
+      "embedHeight": 500,
       "embedScale": 0.78
     },
     {
@@ -88,7 +88,7 @@
       "date": "1 year ago",
       "content": "Embedded Review",
       "embedUrl": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fxavier.turcotte.77%2Fposts%2Fpfbid0owYxc8zGyeBx9VgRJpCiESkhuGbPa5oRM76i2bcdKsrHXtdrfT65wcmcqRAM6J24l&show_text=true&width=390",
-      "embedHeight": 215,
+      "embedHeight": 550,
       "embedScale": 0.70,
       "embedWidth": "107%"
     }
