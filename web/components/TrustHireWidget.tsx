@@ -4,11 +4,12 @@ import { useEffect, useState, useMemo, useCallback } from 'react'
 import { WidgetHeader } from './WidgetHeader'
 import { AccordionSection } from './AccordionSection'
 import { ProjectCard } from './ProjectCard'
+import { VideoCard } from './VideoCard'
 import { MinimizedBar } from './MinimizedBar'
 import { LicenseTab } from './LicenseTab'
 import { ReviewRow, type Review } from './ReviewRow'
-import type { Project } from '../types'
-import { Star, Briefcase, Shield, Info, Building2, ChevronDown, ChevronLeft, ChevronRight, X, Smartphone, Share2 } from 'lucide-react'
+import type { Project, Video } from '../types'
+import { Star, Briefcase, Shield, Info, Building2, ChevronDown, ChevronLeft, ChevronRight, X, Smartphone, Share2, Video as VideoIcon } from 'lucide-react'
 
 
 
@@ -32,6 +33,7 @@ interface FeaturedReview {
     embedUrl?: string
     embedHeight?: number
     embedScale?: number
+    embedWidth?: number | string
     source?: string
 }
 
@@ -60,6 +62,7 @@ interface TrustHireWidgetProps {
 export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
     const [isOpen, setIsOpen] = useState(false)
     const [projects, setProjects] = useState<Project[]>([])
+    const [videos, setVideos] = useState<Video[]>([])
     const [reviews, setReviews] = useState<PlatformData[]>([])
     const [loading, setLoading] = useState(true)
     const [visibleProjects, setVisibleProjects] = useState(2)
@@ -68,6 +71,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
     const [featuredReviews, setFeaturedReviews] = useState<FeaturedReview[]>([])
     const [socialPosts, setSocialPosts] = useState<SocialPost[]>([])
     const [currentPostIndex, setCurrentPostIndex] = useState(0)
+    const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
     const [currentReviewIndex, setCurrentReviewIndex] = useState(0)
     const [hasPlayedAnimation, setHasPlayedAnimation] = useState(false)
     const [isClosed, setIsClosed] = useState(false)
@@ -125,6 +129,10 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
 
                 if (data.projects) {
                     setProjects(data.projects)
+                }
+
+                if (data.videos) {
+                    setVideos(data.videos)
                 }
 
                 if (data.reviews) {
@@ -274,12 +282,12 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                                         )}
 
 
-                                        <div className="h-[160px] relative overflow-hidden">
+                                        <div className="h-[175px] relative overflow-hidden">
                                             {featuredReviews[currentReviewIndex].embedUrl ? (
                                                 <div className="flex justify-center overflow-hidden px-[20px]">
                                                     <iframe
                                                         src={featuredReviews[currentReviewIndex].embedUrl}
-                                                        width="100%"
+                                                        width={featuredReviews[currentReviewIndex].embedWidth || "100%"}
                                                         height={featuredReviews[currentReviewIndex].embedHeight || 194}
                                                         style={{
                                                             border: 'none',
@@ -288,7 +296,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                                                             maxWidth: 'none',
                                                             transform: `scale(${featuredReviews[currentReviewIndex].embedScale || 0.85})`,
                                                             transformOrigin: 'center top',
-                                                            marginBottom: '-35px'
+                                                            marginBottom: `${-1 * (featuredReviews[currentReviewIndex].embedHeight || 194) * (1 - (featuredReviews[currentReviewIndex].embedScale || 0.85))}px`
                                                         }}
                                                         scrolling="no"
                                                         frameBorder="0"
@@ -381,6 +389,61 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                                 )}
                             </AccordionSection>
 
+                            {/* Credentials & Insurance Accordion */}
+                            <AccordionSection
+                                title="Credentials & Insurance"
+                                icon={<Shield className="text-[#32BD5E]" size={20} />}
+                                verified={true}
+                            >
+                                <LicenseTab
+                                    incorporationNumber={businessInfo.incorporationNumber}
+                                    warranty={businessInfo.warranty}
+                                    insuredAmount={businessInfo.insuredAmount}
+                                />
+                            </AccordionSection>
+
+                            {/* About the Business Accordion */}
+                            <AccordionSection
+                                title="About the Business"
+                                icon={<Building2 className="text-[#32BD5E]" size={20} />}
+                                verified={true}
+                            >
+                                <div className="grid grid-cols-3 gap-2">
+                                    <div className="bg-gray-50 rounded-lg p-2 border border-gray-100">
+                                        <p className="text-[10px] text-gray-500 mb-0.5">Founded Year</p>
+                                        <p className="font-semibold text-sm text-gray-900">{businessInfo.foundedYear || '2009'}</p>
+                                    </div>
+
+                                    <div className="bg-gray-50 rounded-lg p-2 border border-gray-100">
+                                        <p className="text-[10px] text-gray-500 mb-0.5">On TrustHire Since</p>
+                                        <p className="font-semibold text-sm text-gray-900">{businessInfo.onTrustHireSince || '2024'}</p>
+                                    </div>
+
+                                    <div className="bg-gray-50 rounded-lg p-2 border border-gray-100">
+                                        <p className="text-[10px] text-gray-500 mb-0.5">Number of Employees</p>
+                                        <p className="font-semibold text-sm text-gray-900">12-15</p>
+                                    </div>
+
+                                    {businessInfo.owners && (
+                                        <div className="col-span-3 bg-gray-50 rounded-lg p-2 border border-gray-100">
+                                            <p className="text-[10px] text-gray-500 mb-0.5">
+                                                Owner{businessInfo.owners.match(/(&|and|et)/i) ? 's' : ''}
+                                            </p>
+                                            <p className="font-semibold text-sm text-gray-900">{businessInfo.owners}</p>
+                                        </div>
+                                    )}
+
+                                    {businessInfo.serviceArea && (
+                                        <div className="col-span-3 bg-gray-50 rounded-lg p-2 border border-gray-100">
+                                            <p className="text-[10px] text-gray-500 mb-0.5">Service Area</p>
+                                            <p className="font-semibold text-sm text-gray-900">{businessInfo.serviceArea}</p>
+                                        </div>
+                                    )}
+
+
+                                </div>
+                            </AccordionSection>
+
                             {/* Social Posts Accordion */}
                             <AccordionSection
                                 title="Social Posts"
@@ -459,60 +522,67 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                                 </div>
                             </AccordionSection>
 
-
-
-                            {/* Credentials & Insurance Accordion */}
+                            {/* Video Gallery Accordion */}
                             <AccordionSection
-                                title="Credentials & Insurance"
-                                icon={<Shield className="text-[#32BD5E]" size={20} />}
+                                title="Video Gallery"
+                                icon={<VideoIcon className="text-[#32BD5E]" size={20} />}
                                 verified={true}
                             >
-                                <LicenseTab
-                                    incorporationNumber={businessInfo.incorporationNumber}
-                                    warranty={businessInfo.warranty}
-                                    insuredAmount={businessInfo.insuredAmount}
-                                />
-                            </AccordionSection>
+                                <div className="space-y-0 relative group">
+                                    {videos && videos.length > 0 ? (
+                                        <>
+                                            <div className="relative pb-3">
+                                                <div className="px-1 is-carousel-slide">
+                                                    <VideoCard
+                                                        video={videos[currentVideoIndex]}
+                                                        isActive={true}
+                                                    />
+                                                </div>
 
-                            {/* About the Business Accordion */}
-                            <AccordionSection
-                                title="About the Business"
-                                icon={<Building2 className="text-[#32BD5E]" size={20} />}
-                                verified={true}
-                            >
-                                <div className="grid grid-cols-3 gap-2">
-                                    <div className="bg-gray-50 rounded-lg p-2 border border-gray-100">
-                                        <p className="text-[10px] text-gray-500 mb-0.5">Founded Year</p>
-                                        <p className="font-semibold text-sm text-gray-900">{businessInfo.foundedYear || '2009'}</p>
-                                    </div>
+                                                {/* Navigation Arrows */}
+                                                {videos.length > 1 && (
+                                                    <>
+                                                        <button
+                                                            onClick={(e) => {
+                                                                e.stopPropagation()
+                                                                setCurrentVideoIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1))
+                                                            }}
+                                                            className="absolute left-2 top-1/2 -translate-y-8 bg-gray-100 p-1.5 rounded-full hover:bg-gray-200 text-gray-600 transition-colors z-10 backdrop-blur-sm"
+                                                        >
+                                                            <ChevronLeft size={20} />
+                                                        </button>
+                                                        <button
+                                                            onClick={(e) => {
+                                                                e.stopPropagation()
+                                                                setCurrentVideoIndex((prev) => (prev === videos.length - 1 ? 0 : prev + 1))
+                                                            }}
+                                                            className="absolute right-2 top-1/2 -translate-y-8 bg-gray-100 p-1.5 rounded-full hover:bg-gray-200 text-gray-600 transition-colors z-10 backdrop-blur-sm"
+                                                        >
+                                                            <ChevronRight size={20} />
+                                                        </button>
+                                                    </>
+                                                )}
+                                            </div>
 
-                                    <div className="bg-gray-50 rounded-lg p-2 border border-gray-100">
-                                        <p className="text-[10px] text-gray-500 mb-0.5">On TrustHire Since</p>
-                                        <p className="font-semibold text-sm text-gray-900">{businessInfo.onTrustHireSince || '2024'}</p>
-                                    </div>
-
-                                    <div className="bg-gray-50 rounded-lg p-2 border border-gray-100">
-                                        <p className="text-[10px] text-gray-500 mb-0.5">Number of Employees</p>
-                                        <p className="font-semibold text-sm text-gray-900">12-15</p>
-                                    </div>
-
-                                    {businessInfo.owners && (
-                                        <div className="col-span-3 bg-gray-50 rounded-lg p-2 border border-gray-100">
-                                            <p className="text-[10px] text-gray-500 mb-0.5">
-                                                Owner{businessInfo.owners.match(/(&|and|et)/i) ? 's' : ''}
-                                            </p>
-                                            <p className="font-semibold text-sm text-gray-900">{businessInfo.owners}</p>
+                                            {/* Carousel Dots */}
+                                            {videos.length > 1 && (
+                                                <div className="flex justify-center gap-2 mt-2">
+                                                    {videos.map((_, index) => (
+                                                        <button
+                                                            key={index}
+                                                            onClick={() => setCurrentVideoIndex(index)}
+                                                            className={`w-2 h-2 rounded-full transition-colors ${index === currentVideoIndex ? 'bg-[#32BD5E]' : 'bg-gray-300 hover:bg-gray-400'}`}
+                                                            aria-label={`Go to video ${index + 1}`}
+                                                        />
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </>
+                                    ) : (
+                                        <div className="text-center py-8 text-gray-500 text-sm">
+                                            Video coming soon
                                         </div>
                                     )}
-
-                                    {businessInfo.serviceArea && (
-                                        <div className="col-span-3 bg-gray-50 rounded-lg p-2 border border-gray-100">
-                                            <p className="text-[10px] text-gray-500 mb-0.5">Service Area</p>
-                                            <p className="font-semibold text-sm text-gray-900">{businessInfo.serviceArea}</p>
-                                        </div>
-                                    )}
-
-
                                 </div>
                             </AccordionSection>
 

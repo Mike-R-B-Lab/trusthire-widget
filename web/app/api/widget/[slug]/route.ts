@@ -12,12 +12,32 @@ export async function GET(
 ) {
     const slug = params.slug
 
-    // Simple lookup map
-    const dataMap: Record<string, any> = {
-        'demo': demoData
-    }
+    // Read file directly to ensure specific updates are reflected immediately
+    let data;
+    try {
+        if (slug === 'demo') {
+            const process = await import('process');
+            const path = await import('path');
+            const fs = await import('fs/promises');
 
-    const data = dataMap[slug]
+            const filePath = path.join(process.cwd(), 'data', 'demo.json');
+            const fileContents = await fs.readFile(filePath, 'utf8');
+            data = JSON.parse(fileContents);
+        } else {
+            // Fallback to static import if needed or handle other slugs
+            const dataMap: Record<string, any> = {
+                'demo': demoData
+            }
+            data = dataMap[slug]
+        }
+    } catch (e) {
+        console.error("Error reading demo.json:", e);
+        // Fallback
+        const dataMap: Record<string, any> = {
+            'demo': demoData
+        }
+        data = dataMap[slug]
+    }
 
     if (data) {
         return NextResponse.json(data)

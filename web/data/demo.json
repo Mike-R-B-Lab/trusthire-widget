@@ -13,12 +13,27 @@
       "height": 788
     },
     {
-      "url": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpeintreulaval%2Fposts%2Fpfbid02gmnbvtXuZT2jkgJciE9NzjUkhyBxJ1X53koMUCGvXea6PGxQMc3GRChS2efgijCMl&show_text=true&width=390",
+      "url": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpeintreulaval%2Fposts%2Fpfbid02gmnbvtXuZT2jkgJciE9NzjUkhyBxJ1X53koMUCGvXea6PGxMc3GRChS2efgijCMl&show_text=true&width=390",
       "height": 734
     },
     {
       "url": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpeintreulaval%2Fposts%2Fpfbid0YjTgpiiQrbGADK1k45QyaG4X2kEWYPBEPmJQHCPvZsgp6sgBR4yE2dHmJ5xDaU1Bl&show_text=true&width=390",
       "height": 679
+    }
+  ],
+  "videos": [
+    {
+      "id": "1",
+      "title": "Vidéo Promotionnelle - Janvier 2026",
+      "url": "/videos/ADD_UL.mp4",
+      "duration": "0:45"
+    },
+    {
+      "id": "2",
+      "title": "Peinture intérieur - Juin 2025",
+      "url": "/videos/peinture_int_UL.mp4",
+      "duration": "1:20",
+      "forceMuted": true
     }
   ],
   "featuredReviews": [
@@ -57,6 +72,25 @@
       "date": "1 month ago",
       "content": "Des jeunes hommes compétents et travaillants.",
       "source": "Google"
+    },
+    {
+      "id": "5",
+      "author": "Alyson",
+      "rating": 5,
+      "date": "2 months ago",
+      "content": "Super bien fait ça!",
+      "source": "Google"
+    },
+    {
+      "id": "6",
+      "author": "Xavier Turcotte",
+      "rating": 5,
+      "date": "1 year ago",
+      "content": "Embedded Review",
+      "embedUrl": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fxavier.turcotte.77%2Fposts%2Fpfbid0owYxc8zGyeBx9VgRJpCiESkhuGbPa5oRM76i2bcdKsrHXtdrfT65wcmcqRAM6J24l&show_text=true&width=390",
+      "embedHeight": 215,
+      "embedScale": 0.75,
+      "embedWidth": "107%"
     }
   ],
   "projects": [

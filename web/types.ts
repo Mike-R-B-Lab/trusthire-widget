@@ -11,3 +11,12 @@ export interface Project {
     source?: string
     duration?: string
 }
+
+export interface Video {
+    id: string
+    title: string
+    url: string
+    poster?: string
+    duration?: string
+    forceMuted?: boolean
+}
