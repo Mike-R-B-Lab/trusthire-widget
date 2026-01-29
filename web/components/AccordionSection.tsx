@@ -87,7 +87,7 @@ export function AccordionSection({
                 <div className="overflow-hidden">
                     <div
                         ref={contentRef}
-                        className="bg-white border-t border-gray-100 px-2.5 pb-2.5 pt-[5px]"
+                        className="bg-white border-t border-gray-200 px-2.5 pb-2.5 pt-[3px]"
                     >
                         {children}
                     </div>
