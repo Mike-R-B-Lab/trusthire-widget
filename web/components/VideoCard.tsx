@@ -94,12 +94,17 @@ export function VideoCard({ video, isActive = false, onPlay }: VideoCardProps) {
                     poster={video.poster}
                     className="w-full h-full object-cover"
                     playsInline
-                    loop
                     muted={isMuted}
                     preload="metadata"
                     onClick={togglePlay}
                     onTimeUpdate={handleTimeUpdate}
-                    onEnded={() => setIsPlaying(false)}
+                    onEnded={() => {
+                        setIsPlaying(false)
+                        if (videoRef.current) {
+                            videoRef.current.currentTime = 0
+                            setProgress(0)
+                        }
+                    }}
                 />
 
                 {/* Overlay Play Button (Initial State) */}
