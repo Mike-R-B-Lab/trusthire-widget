@@ -72,6 +72,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
     const [socialPosts, setSocialPosts] = useState<SocialPost[]>([])
     const [currentPostIndex, setCurrentPostIndex] = useState(0)
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
+    const [isVideoGalleryOpen, setIsVideoGalleryOpen] = useState(false)
     const [currentReviewIndex, setCurrentReviewIndex] = useState(0)
     const [hasPlayedAnimation, setHasPlayedAnimation] = useState(false)
     const [isClosed, setIsClosed] = useState(false)
@@ -527,6 +528,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                                 title="Video Gallery"
                                 icon={<VideoIcon className="text-[#32BD5E]" size={20} />}
                                 verified={true}
+                                onToggle={setIsVideoGalleryOpen}
                             >
                                 <div className="space-y-0 relative group">
                                     {videos && videos.length > 0 ? (
@@ -535,7 +537,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                                                 <div className="px-1 is-carousel-slide">
                                                     <VideoCard
                                                         video={videos[currentVideoIndex]}
-                                                        isActive={true}
+                                                        isActive={isVideoGalleryOpen}
                                                     />
                                                 </div>
 

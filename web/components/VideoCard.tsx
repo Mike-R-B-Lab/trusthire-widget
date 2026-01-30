@@ -87,7 +87,7 @@ export function VideoCard({ video, isActive = false, onPlay }: VideoCardProps) {
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
         >
-            <div className="relative w-full aspect-[9/14] bg-black rounded-xl overflow-hidden group cursor-pointer shadow-sm border border-gray-100">
+            <div className="relative w-full aspect-[9/13] bg-black rounded-xl overflow-hidden group cursor-pointer shadow-sm border border-gray-100">
                 <video
                     ref={videoRef}
                     src={video.url}

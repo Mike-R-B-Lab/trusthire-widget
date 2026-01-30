@@ -135,7 +135,7 @@
     {
       "id": "google",
       "name": "Google",
-      "rating": 5.0,
+      "rating": 4.4,
       "count": 10,
       "color": "bg-blue-500",
       "url": "https://google.com",
@@ -148,7 +148,7 @@
       "count": 7,
       "customRating": "100%",
       "color": "bg-blue-600",
-      "url": "https://facebook.com",
+      "url": "https://www.facebook.com/peintreulaval",
       "reviews": []
     }
   ]
