@@ -61,7 +61,7 @@ export function AccordionSection({
                                 {icon}
                             </div>
                         )}
-                        <h3 className="text-sm font-semibold text-gray-900">
+                        <h3 className="text-xs sm:text-sm font-semibold text-gray-900">
                             {title}
                         </h3>
                     </div>

@@ -195,7 +195,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
     if (!isOpen) {
         return (
             <div
-                className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 ${!hasPlayedAnimation ? 'animate-slide-in-from-right' : ''}`}
+                className={`fixed bottom-2 right-2 sm:bottom-6 sm:right-6 z-50 ${!hasPlayedAnimation ? 'animate-slide-in-from-right' : ''}`}
                 style={!hasPlayedAnimation ? { animationDelay: '1s', animationFillMode: 'both' } : {}}
             >
                 <MinimizedBar onOpen={handleOpen} onClose={handleClose} />
@@ -460,7 +460,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                                             <div className="relative">
                                                 <div
                                                     key={currentPostIndex}
-                                                    className="relative w-full aspect-[3/4] rounded-lg overflow-hidden bg-white border border-gray-100"
+                                                    className="relative w-full aspect-[3/4] rounded-lg overflow-hidden bg-white border border-gray-100 mb-4"
                                                 >
                                                     <img
                                                         src={socialPosts[currentPostIndex].url}
