@@ -422,7 +422,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
 
                                     <div className="bg-gray-50 rounded-lg p-2 border border-gray-100">
                                         <p className="text-[10px] text-gray-500 mb-0.5">Number of Employees</p>
-                                        <p className="font-semibold text-sm text-gray-900">12-15</p>
+                                        <p className="font-semibold text-sm text-gray-900">12</p>
                                     </div>
 
                                     {businessInfo.owners && (
