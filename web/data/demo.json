@@ -66,7 +66,8 @@
       "content": "Embedded Review",
       "embedUrl": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fcaroline.pelle.75%2Fposts%2Fpfbid02tUxw2WsQvx6UAUcR6tENX23w26B1jeQLYjURQhNVNPKWrJnZhhL4eLiaksSCS94Wl&show_text=true&width=390",
       "embedHeight": 500,
-      "embedScale": 0.78
+      "embedScale": 0.78,
+      "mobileEmbedScale": 0.60
     },
     {
       "id": "4",
