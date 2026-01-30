@@ -296,9 +296,9 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                                                             overflow: 'hidden',
                                                             borderRadius: '12px',
                                                             maxWidth: 'none',
-                                                            transform: `scale(${typeof window !== 'undefined' && window.innerWidth < 640 && featuredReviews[currentReviewIndex].mobileEmbedScale ? featuredReviews[currentReviewIndex].mobileEmbedScale : (featuredReviews[currentReviewIndex].embedScale || 0.85)})`,
+                                                            transform: `scale(${isMobile && featuredReviews[currentReviewIndex].mobileEmbedScale ? featuredReviews[currentReviewIndex].mobileEmbedScale : (featuredReviews[currentReviewIndex].embedScale || 0.85)})`,
                                                             transformOrigin: 'center top',
-                                                            marginBottom: `${-1 * (featuredReviews[currentReviewIndex].embedHeight || 194) * (1 - (typeof window !== 'undefined' && window.innerWidth < 640 && featuredReviews[currentReviewIndex].mobileEmbedScale ? featuredReviews[currentReviewIndex].mobileEmbedScale : (featuredReviews[currentReviewIndex].embedScale || 0.85)))}px`
+                                                            marginBottom: `${-1 * (featuredReviews[currentReviewIndex].embedHeight || 194) * (1 - (isMobile && featuredReviews[currentReviewIndex].mobileEmbedScale ? featuredReviews[currentReviewIndex].mobileEmbedScale : (featuredReviews[currentReviewIndex].embedScale || 0.85)))}px`
                                                         }}
                                                         scrolling="no"
                                                         frameBorder="0"
