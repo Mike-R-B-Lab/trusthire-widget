@@ -460,15 +460,12 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                                             <div className="relative">
                                                 <div
                                                     key={currentPostIndex}
-                                                    style={{
-                                                        height: socialPosts[currentPostIndex].containerHeight ? `${socialPosts[currentPostIndex].containerHeight}px` : undefined,
-                                                        overflow: 'hidden'
-                                                    }}
+                                                    className="relative w-full rounded-lg overflow-hidden bg-gray-50 border border-gray-100"
                                                 >
                                                     <img
                                                         src={socialPosts[currentPostIndex].url}
                                                         alt="Social Post"
-                                                        className="w-full h-full object-contain"
+                                                        className="w-full h-auto object-contain block"
                                                         style={{
                                                             marginTop: socialPosts[currentPostIndex].marginTop ? `${socialPosts[currentPostIndex].marginTop}px` : undefined
                                                         }}
