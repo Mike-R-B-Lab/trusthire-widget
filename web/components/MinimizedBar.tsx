@@ -8,7 +8,7 @@ interface MinimizedBarProps {
 export function MinimizedBar({ onOpen, onClose }: MinimizedBarProps) {
     return (
         <div
-            className="w-fit min-w-[160px] sm:min-w-[200px] bg-white rounded-lg flex flex-col items-center pt-[8px] pb-[10px] px-[10px] sm:pt-[12px] sm:pb-[16px] sm:px-[14px] gap-1.5 sm:gap-2 scale-90 sm:scale-105 origin-bottom-right relative"
+            className="w-fit min-w-[160px] sm:min-w-[200px] bg-white rounded-lg flex flex-col items-center pt-[8px] pb-[10px] px-[10px] sm:pt-[12px] sm:pb-[16px] sm:px-[14px] gap-1.5 sm:gap-2 scale-90 sm:scale-105 origin-bottom-right relative p-2.5"
         >
             {/* Close Button */}
             <button
