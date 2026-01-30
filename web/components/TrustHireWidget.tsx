@@ -68,6 +68,15 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
     const [loading, setLoading] = useState(true)
     const [visibleProjects, setVisibleProjects] = useState(2)
     const [visiblePosts, setVisiblePosts] = useState(1)
+    const [isMobile, setIsMobile] = useState(false)
+
+    // Track mobile viewport
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 640)
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
     const [businessInfo, setBusinessInfo] = useState<BusinessInfo>({ name: '' })
     const [featuredReviews, setFeaturedReviews] = useState<FeaturedReview[]>([])
     const [socialPosts, setSocialPosts] = useState<SocialPost[]>([])
