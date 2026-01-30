@@ -14,7 +14,7 @@ export function LicenseTab({ incorporationNumber, warranty, insuredAmount }: Lic
             {/* Incorporation Number */}
             <div className="py-2 border-b border-gray-200">
                 <div className="flex items-center justify-between">
-                    <span className="text-[13px] font-medium text-gray-600">Incorporation #</span>
+                    <span className="text-[13px] font-medium text-gray-600">N° d'incorporation</span>
                     {incorporationNumber ? (
                         <div className="flex items-center gap-2">
                             <button
@@ -46,7 +46,7 @@ export function LicenseTab({ incorporationNumber, warranty, insuredAmount }: Lic
             {/* Insurance */}
             <div className="py-2 border-b border-gray-200">
                 <div className="flex items-center justify-between">
-                    <span className="text-[13px] font-medium text-gray-600">Insurance</span>
+                    <span className="text-[13px] font-medium text-gray-600">Assurance</span>
                     {insuredAmount ? (
                         <div className="flex items-center gap-1">
                             <a
@@ -68,7 +68,7 @@ export function LicenseTab({ incorporationNumber, warranty, insuredAmount }: Lic
             {/* Warranty */}
             <div className="py-2">
                 <div className="flex items-center justify-between">
-                    <span className="text-[13px] font-medium text-gray-600">Warranty</span>
+                    <span className="text-[13px] font-medium text-gray-600">Garantie</span>
                     <span className="text-xs text-gray-500 w-[180px] text-right leading-tight">{warranty || 'N/A'}</span>
                 </div>
             </div>

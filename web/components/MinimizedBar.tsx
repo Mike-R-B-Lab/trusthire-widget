@@ -25,7 +25,7 @@ export function MinimizedBar({ onOpen, onClose }: MinimizedBarProps) {
             <div className="flex items-center justify-center gap-1.5 w-full">
                 {/* Text */}
                 <span className="text-xs sm:text-[13.5px] text-black leading-none whitespace-nowrap">
-                    Verified by <span className="font-bold">TrustHire</span>
+                    Vérifié par <span className="font-bold">TrustHire</span>
                 </span>
 
                 {/* Shield Icon */}
@@ -44,7 +44,7 @@ export function MinimizedBar({ onOpen, onClose }: MinimizedBarProps) {
                     onClick={onOpen}
                     className="bg-[#32BD5E] hover:bg-[#2ca652] transition-colors rounded-md py-2.5 flex items-center gap-1.5 justify-center w-full shadow-sm cursor-pointer"
                 >
-                    <span className="text-[10px] sm:text-[11px] font-medium text-white leading-none">View business summary</span>
+                    <span className="text-[10px] sm:text-[11px] font-medium text-white leading-none">Résumé de l'entreprise</span>
                     <ArrowRight size={12} className="text-white w-3 h-3 sm:w-auto sm:h-auto" />
                 </button>
             </div>

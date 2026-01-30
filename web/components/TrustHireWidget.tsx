@@ -221,7 +221,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 py-2 pl-3 pr-4 relative flex items-center">
                         <div className="flex items-center gap-1">
                             <span className="text-[14px] text-black leading-none whitespace-nowrap">
-                                Verified by <span className="font-bold">TrustHire</span>
+                                Vérifié par <span className="font-bold">TrustHire</span>
                             </span>
                             <div className="shrink-0 w-7 h-7">
                                 <img
@@ -247,7 +247,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                         <div className="px-3 pt-1 pb-3 space-y-2">
                             {/* Reviews Accordion */}
                             <AccordionSection
-                                title="Online Reviews"
+                                title="Avis en ligne"
                                 icon={<Star className="text-[#32BD5E]" size={20} />}
                                 verified={true}
                             >
@@ -392,7 +392,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
 
                             {/* Credentials & Insurance Accordion */}
                             <AccordionSection
-                                title="Credentials & Insurance"
+                                title="Accréditations et Assurances"
                                 icon={<Shield className="text-[#32BD5E]" size={20} />}
                                 verified={true}
                             >
@@ -405,23 +405,23 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
 
                             {/* About the Business Accordion */}
                             <AccordionSection
-                                title="About the Business"
+                                title="L'entreprise"
                                 icon={<Building2 className="text-[#32BD5E]" size={20} />}
                                 verified={true}
                             >
                                 <div className="grid grid-cols-3 gap-2">
                                     <div className="bg-gray-50 rounded-lg p-2 border border-gray-100">
-                                        <p className="text-[10px] text-gray-500 mb-0.5">Founded Year</p>
+                                        <p className="text-[10px] text-gray-500 mb-0.5">Année de fondation</p>
                                         <p className="font-semibold text-sm text-gray-900">{businessInfo.foundedYear || '2009'}</p>
                                     </div>
 
                                     <div className="bg-gray-50 rounded-lg p-2 border border-gray-100">
-                                        <p className="text-[10px] text-gray-500 mb-0.5">On TrustHire Since</p>
+                                        <p className="text-[10px] text-gray-500 mb-0.5">Sur TrustHire depuis</p>
                                         <p className="font-semibold text-sm text-gray-900">{businessInfo.onTrustHireSince || '2024'}</p>
                                     </div>
 
                                     <div className="bg-gray-50 rounded-lg p-2 border border-gray-100">
-                                        <p className="text-[10px] text-gray-500 mb-0.5">Number of Employees</p>
+                                        <p className="text-[10px] text-gray-500 mb-0.5">Nombre d'employés</p>
                                         <p className="font-semibold text-sm text-gray-900">12</p>
                                     </div>
 
@@ -436,7 +436,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
 
                                     {businessInfo.serviceArea && (
                                         <div className="col-span-3 bg-gray-50 rounded-lg p-2 border border-gray-100">
-                                            <p className="text-[10px] text-gray-500 mb-0.5">Service Area</p>
+                                            <p className="text-[10px] text-gray-500 mb-0.5">Zone desservie</p>
                                             <p className="font-semibold text-sm text-gray-900">{businessInfo.serviceArea}</p>
                                         </div>
                                     )}
@@ -447,7 +447,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
 
                             {/* Social Posts Accordion */}
                             <AccordionSection
-                                title="Social Posts"
+                                title="Publications sociales"
                                 icon={<Share2 className="text-[#32BD5E]" size={20} />}
                                 verified={true}
                                 onToggle={handleSocialToggle}
@@ -516,7 +516,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
 
                             {/* Video Gallery Accordion */}
                             <AccordionSection
-                                title="Video Gallery"
+                                title="Galerie vidéo"
                                 icon={<VideoIcon className="text-[#32BD5E]" size={20} />}
                                 verified={true}
                                 onToggle={setIsVideoGalleryOpen}
@@ -581,23 +581,18 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
 
                             {/* About TrustHire Accordion */}
                             <AccordionSection
-                                title="About TrustHire"
+                                title="À propos de TrustHire"
                                 icon={<Info size={16} />}
                             >
                                 <div className="space-y-3">
                                     <div>
                                         <p className="text-xs text-gray-600 leading-relaxed mb-2">
-                                            TrustHire is an independent verification platform that aggregates publicly available business
-                                            information and presents it alongside selected materials provided directly by the business. Reviews,
-                                            credentials, licenses, insurance details, and examples of past work are displayed with the business's
-                                            knowledge and consent.
+                                            TrustHire est une plateforme de vérification indépendante qui regroupe des informations publiques sur les entreprises et les présente aux côtés de documents fournis directement par celles-ci. Les avis, accréditations, licences, détails d'assurance et exemples de travaux antérieurs sont affichés avec l'autorisation et le plein consentement de l'entreprise.
                                         </p>
                                         <p className="text-xs text-gray-600 leading-relaxed mb-2">
-                                            Information shown by TrustHire is presented as sourced and is not altered or modified. By organizing
-                                            reviewed and clearly attributed business information in one place, TrustHire helps customers better
-                                            understand a business when making decisions.{' '}
+                                            Les informations affichées par TrustHire sont présentées telles quelles et ne sont ni altérées ni modifiées. En organisant des informations vérifiées et clairement attribuées en un seul endroit, TrustHire aide les clients à mieux comprendre une entreprise lors de leurs prises de décision.{' '}
                                             <a href="https://trusttabs.com" target="_blank" rel="noopener noreferrer" className="text-[#32BD5E] hover:underline font-medium">
-                                                Learn more
+                                                En savoir plus
                                             </a>
                                         </p>
                                     </div>
@@ -606,11 +601,11 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                                     <div className="border-t border-gray-200"></div>
 
                                     <div>
-                                        <h4 className="font-semibold text-sm text-gray-900 mb-1.5">Business Use</h4>
+                                        <h4 className="font-semibold text-sm text-gray-900 mb-1.5">Usage commercial</h4>
                                         <p className="text-xs text-gray-600 leading-relaxed mb-2">
-                                            Independent verification and transparent presentation of business information.{' '}
+                                            Vérification indépendante et présentation transparente des informations d'entreprise.{' '}
                                             <a href="https://trusttabs.com/business" target="_blank" rel="noopener noreferrer" className="text-[#32BD5E] hover:underline font-medium">
-                                                View applicability
+                                                Voir l'applicabilité
                                             </a>
                                         </p>
                                     </div>
