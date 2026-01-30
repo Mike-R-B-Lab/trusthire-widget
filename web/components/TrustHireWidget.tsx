@@ -195,7 +195,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
     if (!isOpen) {
         return (
             <div
-                className={`fixed bottom-0 right-0 -mb-2 -mr-2 sm:bottom-6 sm:right-6 sm:mb-0 sm:mr-0 z-50 ${!hasPlayedAnimation ? 'animate-slide-in-from-right' : ''}`}
+                className={`fixed bottom-0 right-0 sm:bottom-6 sm:right-6 z-50 ${!hasPlayedAnimation ? 'animate-slide-in-from-right' : ''}`}
                 style={!hasPlayedAnimation ? { animationDelay: '1s', animationFillMode: 'both' } : {}}
             >
                 <MinimizedBar onOpen={handleOpen} onClose={handleClose} />
