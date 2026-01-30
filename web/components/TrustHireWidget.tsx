@@ -33,6 +33,7 @@ interface FeaturedReview {
     embedUrl?: string
     embedHeight?: number
     embedScale?: number
+    mobileEmbedScale?: number
     embedWidth?: number | string
     source?: string
 }
