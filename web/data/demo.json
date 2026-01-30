@@ -9,16 +9,19 @@
   "insuredAmount": "$2,000,000",
   "socialPosts": [
     {
-      "url": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpeintreulaval%2Fposts%2Fpfbid02PfqBv4GyBRvM5FD3aJunXRLMxU2Hz8mXyTzHEgkSNH5NFF7tMw6pR3HzWBLN74U1l&show_text=true&width=390",
-      "height": 788
+      "url": "/images/social/post-1.jpg",
+      "height": 550,
+      "containerHeight": 550
     },
     {
-      "url": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpeintreulaval%2Fposts%2Fpfbid02gmnbvtXuZT2jkgJciE9NzjUkhyBxJ1X53koMUCGvXea6PGxMc3GRChS2efgijCMl&show_text=true&width=390",
-      "height": 734
+      "url": "/images/social/post-2.jpg",
+      "height": 550,
+      "containerHeight": 550
     },
     {
-      "url": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpeintreulaval%2Fposts%2Fpfbid0YjTgpiiQrbGADK1k45QyaG4X2kEWYPBEPmJQHCPvZsgp6sgBR4yE2dHmJ5xDaU1Bl&show_text=true&width=390",
-      "height": 679
+      "url": "/images/social/post-3.jpg",
+      "height": 550,
+      "containerHeight": 550
     }
   ],
   "videos": [

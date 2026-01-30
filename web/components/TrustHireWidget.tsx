@@ -465,19 +465,13 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                                                         overflow: 'hidden'
                                                     }}
                                                 >
-                                                    <iframe
+                                                    <img
                                                         src={socialPosts[currentPostIndex].url}
-                                                        width="100%"
-                                                        height={socialPosts[currentPostIndex].height || 725}
+                                                        alt="Social Post"
+                                                        className="w-full h-full object-contain"
                                                         style={{
-                                                            border: 'none',
-                                                            overflow: 'hidden',
                                                             marginTop: socialPosts[currentPostIndex].marginTop ? `${socialPosts[currentPostIndex].marginTop}px` : undefined
                                                         }}
-                                                        scrolling="no"
-                                                        frameBorder="0"
-                                                        allowFullScreen={true}
-                                                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                                                     />
                                                 </div>
 
