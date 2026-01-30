@@ -61,15 +61,15 @@ export function AccordionSection({
                                 {icon}
                             </div>
                         )}
-                        <h3 className="text-[11px] sm:text-sm font-semibold text-gray-900">
+                        <h3 className="text-[10px] sm:text-sm font-semibold text-gray-900">
                             {title}
                         </h3>
                     </div>
                 </div>
                 <div className="flex-shrink-0 flex items-center gap-2">
                     {verified && (
-                        <span className="flex items-center text-[10px] font-medium text-[#32BD5E] bg-[#32BD5E]/10 px-1.5 py-0.5 rounded-full border border-[#32BD5E]/20">
-                            Verified
+                        <span className="flex items-center text-[9px] font-medium text-[#32BD5E] bg-[#32BD5E]/10 px-1.5 py-0.5 rounded-full border border-[#32BD5E]/20">
+                            Vérifié
                         </span>
                     )}
                     {isOpen ? (

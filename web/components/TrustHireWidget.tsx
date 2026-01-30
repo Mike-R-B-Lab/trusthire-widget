@@ -285,7 +285,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
 
                                         <div className="h-[175px] relative overflow-hidden">
                                             {featuredReviews[currentReviewIndex].embedUrl ? (
-                                                <div className="flex justify-center overflow-hidden px-[20px]">
+                                                <div className="flex justify-center overflow-hidden">
                                                     <iframe
                                                         src={featuredReviews[currentReviewIndex].embedUrl}
                                                         width={featuredReviews[currentReviewIndex].embedWidth || "100%"}
@@ -392,7 +392,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
 
                             {/* Credentials & Insurance Accordion */}
                             <AccordionSection
-                                title="Accréditations et Assurances"
+                                title="Conformité & Protection"
                                 icon={<Shield className="text-[#32BD5E]" size={20} />}
                                 verified={true}
                             >
@@ -428,7 +428,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                                     {businessInfo.owners && (
                                         <div className="col-span-3 bg-gray-50 rounded-lg p-2 border border-gray-100">
                                             <p className="text-[10px] text-gray-500 mb-0.5">
-                                                Owner{businessInfo.owners.match(/(&|and|et)/i) ? 's' : ''}
+                                                Propriétaire{businessInfo.owners.match(/(&|and|et)/i) ? 's' : ''}
                                             </p>
                                             <p className="font-semibold text-sm text-gray-900">{businessInfo.owners}</p>
                                         </div>
