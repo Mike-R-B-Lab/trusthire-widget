@@ -3,12 +3,17 @@ import { ArrowRight, ShieldCheck, X } from 'lucide-react'
 interface MinimizedBarProps {
     onOpen: () => void
     onClose: () => void
+    isMobile: boolean
 }
 
-export function MinimizedBar({ onOpen, onClose }: MinimizedBarProps) {
+export function MinimizedBar({ onOpen, onClose, isMobile }: MinimizedBarProps) {
     return (
         <div
-            className="w-fit min-w-[160px] sm:min-w-[200px] bg-white rounded-lg flex flex-col items-center pt-[8px] pb-[10px] px-[10px] sm:pt-[12px] sm:pb-[16px] sm:px-[14px] gap-1.5 sm:gap-2 scale-90 sm:scale-105 origin-bottom-right relative sm:p-2.5"
+            className={`w-fit bg-white rounded-lg flex flex-col items-center origin-bottom-right relative
+            ${isMobile
+                    ? 'min-w-[160px] pt-[8px] pb-[10px] px-[10px] gap-1.5 scale-90'
+                    : 'min-w-[200px] pt-[12px] pb-[16px] px-[14px] gap-2 scale-105 p-2.5'
+                }`}
         >
             {/* Close Button */}
             <button
@@ -24,7 +29,7 @@ export function MinimizedBar({ onOpen, onClose }: MinimizedBarProps) {
             {/* Top row: Text + Icon */}
             <div className="flex items-center justify-center gap-1.5 w-full">
                 {/* Text */}
-                <span className="text-xs sm:text-[13.5px] text-black leading-none whitespace-nowrap">
+                <span className={`text-black leading-none whitespace-nowrap ${isMobile ? 'text-xs' : 'text-[13.5px]'}`}>
                     Vérifié par <span className="font-bold">TrustHire</span>
                 </span>
 
@@ -44,8 +49,8 @@ export function MinimizedBar({ onOpen, onClose }: MinimizedBarProps) {
                     onClick={onOpen}
                     className="bg-[#32BD5E] hover:bg-[#2ca652] transition-colors rounded-md py-2.5 flex items-center gap-1.5 justify-center w-full shadow-sm cursor-pointer"
                 >
-                    <span className="text-[10px] sm:text-[11px] font-medium text-white leading-none">Résumé de l'entreprise</span>
-                    <ArrowRight size={12} className="text-white w-3 h-3 sm:w-auto sm:h-auto" />
+                    <span className={`font-medium text-white leading-none ${isMobile ? 'text-[10px]' : 'text-[11px]'}`}>Résumé de l'entreprise</span>
+                    <ArrowRight size={12} className={`text-white ${isMobile ? 'w-3 h-3' : 'w-auto h-auto'}`} />
                 </button>
             </div>
         </div>

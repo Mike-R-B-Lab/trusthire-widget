@@ -70,9 +70,13 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
     const [visiblePosts, setVisiblePosts] = useState(1)
     const [isMobile, setIsMobile] = useState(false)
 
-    // Track mobile viewport
+    // Track mobile viewport with User Agent check to avoid iframe false positives
     useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth < 640)
+        const checkMobile = () => {
+            const isSmallScreen = window.innerWidth < 640
+            const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+            setIsMobile(isSmallScreen && isMobileUA)
+        }
         checkMobile()
         window.addEventListener('resize', checkMobile)
         return () => window.removeEventListener('resize', checkMobile)
@@ -208,7 +212,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                 className={`fixed bottom-0 right-0 sm:bottom-9 sm:right-9 z-50 ${!hasPlayedAnimation ? 'animate-slide-in-from-right' : ''}`}
                 style={!hasPlayedAnimation ? { animationDelay: '1s', animationFillMode: 'both' } : {}}
             >
-                <MinimizedBar onOpen={handleOpen} onClose={handleClose} />
+                <MinimizedBar onOpen={handleOpen} onClose={handleClose} isMobile={isMobile} />
             </div>
         )
     }
