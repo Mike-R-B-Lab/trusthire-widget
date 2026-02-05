@@ -209,8 +209,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
     if (!isOpen) {
         return (
             <div
-                className={`fixed bottom-0 right-0 sm:bottom-9 sm:right-9 z-50 ${!hasPlayedAnimation ? 'animate-slide-in-from-right' : ''}`}
-                style={!hasPlayedAnimation ? { animationDelay: '1s', animationFillMode: 'both' } : {}}
+                className="fixed top-0 right-0 sm:top-9 sm:right-9 z-50"
             >
                 <MinimizedBar onOpen={handleOpen} onClose={handleClose} isMobile={isMobile} />
             </div>
@@ -234,12 +233,12 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                     {/* White band strip at top with Verified by TrustHire - sticky on scroll */}
                     <div className="sticky top-0 z-10 bg-white border-b border-gray-200 py-2 pl-3 pr-4 relative flex items-center">
                         <div className="flex items-center gap-1">
-                            <span className="text-[14px] text-black leading-none whitespace-nowrap">
+                            <span className="text-[13px] text-black leading-none whitespace-nowrap">
                                 Vérifié par <span className="font-bold">TrustHire</span>
                             </span>
-                            <div className="shrink-0 w-7 h-7">
+                            <div className="shrink-0 w-[22px] h-[22px]">
                                 <img
-                                    src="/contractor_icon_new.png"
+                                    src="/trusthire-check.png"
                                     alt="TrustHire"
                                     className="w-full h-full object-contain"
                                 />
@@ -258,7 +257,7 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
                     <div className="flex-1 overflow-y-auto bg-white">
                         <WidgetHeader onClose={() => setIsOpen(false)} businessName={businessInfo.name} />
 
-                        <div className="px-3 pt-1 pb-3 space-y-2">
+                        <div className="px-3 pt-0 pb-3 space-y-2">
                             {/* Reviews Accordion */}
                             <AccordionSection
                                 title="Avis en ligne"
