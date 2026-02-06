@@ -1,6 +1,6 @@
 import ReactGA from 'react-ga4';
 
-const MEASUREMENT_ID = 'G-XXXXXXXXXX'; // TODO: Replace with actual Measurement ID
+const MEASUREMENT_ID = 'G-PE9XW2G3PY'; // TODO: Replace with actual Measurement ID
 
 interface TrackingEvent {
     category: string;
@@ -14,12 +14,15 @@ export const initGA = () => {
     // Only initialize if not already initialized
     // react-ga4 handles this internally usually, but good to be safe or just call it 
     if (typeof window !== 'undefined') {
+        console.log('Comparing IDs:', MEASUREMENT_ID);
         ReactGA.initialize(MEASUREMENT_ID);
+        console.log('GA4 Initialized');
     }
 };
 
 export const trackEvent = ({ category, action, label, value, ...rest }: TrackingEvent) => {
     if (typeof window !== 'undefined') {
+        console.log(`GA4 Event: ${category} - ${action}`, { label, value, ...rest });
         ReactGA.event({
             category,
             action,
