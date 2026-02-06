@@ -6,7 +6,7 @@ interface MinimizedBarProps {
     isMobile: boolean
 }
 
-import { ChevronRight, Check } from 'lucide-react'
+import { ChevronRight, ChevronDown, Check } from 'lucide-react'
 
 interface MinimizedBarProps {
     onOpen: () => void
@@ -16,14 +16,13 @@ interface MinimizedBarProps {
 
 export function MinimizedBar({ onOpen, onClose, isMobile }: MinimizedBarProps) {
     return (
-        <div className="relative group/container">
+        <div className="relative group/container flex flex-col items-center">
             <button
                 onClick={onOpen}
-                className={`group flex items-center bg-white rounded-[24px] shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out cursor-pointer relative overflow-visible select-none text-left
-            ${!isMobile ? 'hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:-translate-y-[1px]' : ''}
-            ${isMobile ? 'py-3 pl-5 pr-12' : 'py-4 px-6 hover:pr-12'}`}
+                className={`group flex items-center bg-white rounded-[24px] shadow-[0_2px_12px_rgba(0,0,0,0.08)] cursor-pointer relative overflow-visible select-none text-left
+            ${isMobile ? 'py-3 px-5' : 'py-4 px-6'}`}
             >
-                <div className={`flex flex-col gap-1.5 transition-all duration-300 ease-out`}>
+                <div className={`flex flex-col gap-1.5`}>
                     {/* Header Row */}
                     <div className="flex items-center gap-1.5">
                         <span className={`font-semibold text-gray-900 tracking-tight ${isMobile ? 'text-[13px]' : 'text-[14px]'}`}>
@@ -84,17 +83,15 @@ export function MinimizedBar({ onOpen, onClose, isMobile }: MinimizedBarProps) {
                         </div>
                     </div>
                 </div>
+            </button>
 
-                {/* Hover Arrow Effect - Grey Circle */}
-                <div className={`absolute right-0 top-0 h-full w-12 flex items-center justify-center transition-all duration-300 ease-out
-                ${isMobile
-                        ? 'opacity-100 scale-100'
-                        : 'opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100'
-                    }`}>
-                    <div className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center">
-                        <ChevronRight size={18} className="text-[#42c53f]" strokeWidth={2.5} />
-                    </div>
-                </div>
+            {/* Bottom Chevron Tab */}
+            <button
+                onClick={onOpen}
+                className="bg-white rounded-b-xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] pt-2.5 pb-0.5 px-[15px] -mt-2 z-[-1] flex items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors"
+                aria-label="Open widget"
+            >
+                <ChevronDown size={18} className="text-gray-600" strokeWidth={2.5} />
             </button>
         </div>
     )
