@@ -76,8 +76,8 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
     // Initialize Analytics
     useEffect(() => {
         initGA();
-        trackWidgetView(variant);
-    }, [variant]); // Re-track if variant changes, though unlikely
+        trackWidgetView(variant, slug);
+    }, [variant, slug]); // Re-track if variant changes, though unlikely
 
     // Track mobile viewport with User Agent check to avoid iframe false positives
     useEffect(() => {
@@ -196,13 +196,13 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
 
     const handleOpen = () => {
         setIsOpen(true)
-        trackWidgetOpen(variant);
+        trackWidgetOpen(variant, slug);
         window.parent.postMessage({ type: 'trusthire-resize', state: 'fullscreen' }, '*')
     }
 
     const handleClose = () => {
         setIsClosed(true)
-        trackWidgetClose(variant);
+        trackWidgetClose(variant, slug);
         window.parent.postMessage({ type: 'trusthire-resize', state: 'closed' }, '*')
     }
 

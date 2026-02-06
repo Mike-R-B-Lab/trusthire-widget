@@ -33,29 +33,32 @@ export const trackEvent = ({ category, action, label, value, ...rest }: Tracking
     }
 };
 
-export const trackWidgetView = (variant: 'A' | 'B') => {
+export const trackWidgetView = (variant: 'A' | 'B', slug: string) => {
     trackEvent({
         category: 'Widget',
         action: 'View',
-        label: `Variant ${variant}`,
-        variant: variant
+        label: `Variant ${variant} - ${slug}`,
+        variant: variant,
+        client_slug: slug
     });
 };
 
-export const trackWidgetOpen = (variant: 'A' | 'B') => {
+export const trackWidgetOpen = (variant: 'A' | 'B', slug: string) => {
     trackEvent({
         category: 'Widget',
         action: 'Open',
-        label: `Variant ${variant}`,
-        variant: variant
+        label: `Variant ${variant} - ${slug}`,
+        variant: variant,
+        client_slug: slug
     });
 };
 
-export const trackWidgetClose = (variant: 'A' | 'B') => {
+export const trackWidgetClose = (variant: 'A' | 'B', slug: string) => {
     trackEvent({
         category: 'Widget',
         action: 'Close',
-        label: `Variant ${variant}`,
-        variant: variant
+        label: `Variant ${variant} - ${slug}`,
+        variant: variant,
+        client_slug: slug
     });
 };
