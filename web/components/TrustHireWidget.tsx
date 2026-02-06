@@ -6,10 +6,12 @@ import { AccordionSection } from './AccordionSection'
 import { ProjectCard } from './ProjectCard'
 import { VideoCard } from './VideoCard'
 import { MinimizedBar } from './MinimizedBar'
+import { VerticalLauncher } from './VerticalLauncher'
 import { LicenseTab } from './LicenseTab'
 import { ReviewRow, type Review } from './ReviewRow'
 import type { Project, Video } from '../types'
 import { Star, Briefcase, Shield, Info, Building2, ChevronDown, ChevronLeft, ChevronRight, X, Smartphone, Share2, Video as VideoIcon } from 'lucide-react'
+import { initGA, trackWidgetView, trackWidgetOpen, trackWidgetClose } from '../lib/analytics'
 
 
 
@@ -58,9 +60,10 @@ interface SocialPost {
 
 interface TrustHireWidgetProps {
     slug: string
+    variant?: 'A' | 'B'
 }
 
-export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
+export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
     const [isOpen, setIsOpen] = useState(false)
     const [projects, setProjects] = useState<Project[]>([])
     const [videos, setVideos] = useState<Video[]>([])
@@ -69,6 +72,12 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
     const [visibleProjects, setVisibleProjects] = useState(2)
     const [visiblePosts, setVisiblePosts] = useState(1)
     const [isMobile, setIsMobile] = useState(false)
+
+    // Initialize Analytics
+    useEffect(() => {
+        initGA();
+        trackWidgetView(variant);
+    }, [variant]); // Re-track if variant changes, though unlikely
 
     // Track mobile viewport with User Agent check to avoid iframe false positives
     useEffect(() => {
@@ -187,11 +196,13 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
 
     const handleOpen = () => {
         setIsOpen(true)
+        trackWidgetOpen(variant);
         window.parent.postMessage({ type: 'trusthire-resize', state: 'fullscreen' }, '*')
     }
 
     const handleClose = () => {
         setIsClosed(true)
+        trackWidgetClose(variant);
         window.parent.postMessage({ type: 'trusthire-resize', state: 'closed' }, '*')
     }
 
@@ -207,6 +218,14 @@ export function TrustHireWidget({ slug }: TrustHireWidgetProps) {
     }
 
     if (!isOpen) {
+        if (variant === 'B') {
+            return (
+                <div className="fixed top-1/2 left-0 sm:left-4 -translate-y-1/2 z-50">
+                    <VerticalLauncher onOpen={handleOpen} onClose={handleClose} isMobile={isMobile} />
+                </div>
+            )
+        }
+        // Default Variant A
         return (
             <div
                 className={`fixed top-0 right-0 sm:top-9 sm:right-9 z-50 ${isMobile ? 'scale-[0.8] origin-top-right' : ''}`}
