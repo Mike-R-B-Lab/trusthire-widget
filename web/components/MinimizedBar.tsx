@@ -86,13 +86,13 @@ export function MinimizedBar({ onOpen, onClose, isMobile }: MinimizedBarProps) {
                 </div>
 
                 {/* Hover Arrow Effect - Grey Circle */}
-                <div className={`absolute right-2 top-1/2 -translate-y-1/2 transition-all duration-300 ease-out flex items-center justify-center
+                <div className={`absolute right-0 top-0 h-full w-12 flex items-center justify-center transition-all duration-300 ease-out
                 ${isMobile
                         ? 'opacity-100 scale-100'
                         : 'opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100'
                     }`}>
-                    <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center">
-                        <ChevronRight size={20} className="text-[#42c53f]" strokeWidth={2.5} />
+                    <div className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center">
+                        <ChevronRight size={18} className="text-[#42c53f]" strokeWidth={2.5} />
                     </div>
                 </div>
             </button>
