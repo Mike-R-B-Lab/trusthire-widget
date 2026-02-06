@@ -1,0 +1,57 @@
+{
+    "companyName": "Ulaval",
+    "foundedYear": "1663",
+    "onTrustHireSince": "2024",
+    "owners": "Université Laval",
+    "serviceArea": "Québec City, QC",
+    "incorporationNumber": "1141203491",
+    "warranty": "Verified Education",
+    "insuredAmount": "$5,000,000",
+    "projects": [
+        {
+            "id": "1",
+            "title": "Pavillon Ferdinand-Vandry",
+            "date": "2023-09-15",
+            "description": "Modernization of medical research facilities",
+            "imageUrl": "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=2886&auto=format&fit=crop",
+            "location": "Québec, QC"
+        },
+        {
+            "id": "2",
+            "title": "PEPS Sports Complex",
+            "date": "2023-05-20",
+            "description": "Renovation of the main indoor stadium",
+            "imageUrl": "https://images.unsplash.com/photo-1577416412292-7640307831cd?q=80&w=2800&auto=format&fit=crop",
+            "location": "Québec, QC"
+        }
+    ],
+    "videos": [
+        {
+            "id": "v1",
+            "thumbnailUrl": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2940&auto=format&fit=crop",
+            "title": "Campus Tour 2024",
+            "duration": "2:15"
+        }
+    ],
+    "reviews": [
+        {
+            "id": "google",
+            "name": "Google",
+            "rating": 4.8,
+            "count": 1250,
+            "color": "from-white to-gray-50",
+            "url": "#",
+            "reviews": []
+        }
+    ],
+    "featuredReviews": [
+        {
+            "id": "fr1",
+            "author": "Marie-Claude Tremblay",
+            "rating": 5,
+            "date": "2 months ago",
+            "content": "Excellent environment for learning and research. The facilities are top-notch.",
+            "source": "Google"
+        }
+    ]
+}

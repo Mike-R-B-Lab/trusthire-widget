@@ -12,36 +12,19 @@ export async function GET(
 ) {
     const slug = params.slug
 
-    // Read file directly to ensure specific updates are reflected immediately
-    let data;
     try {
-        if (slug === 'demo') {
-            const process = await import('process');
-            const path = await import('path');
-            const fs = await import('fs/promises');
+        const process = await import('process');
+        const path = await import('path');
+        const fs = await import('fs/promises');
 
-            const filePath = path.join(process.cwd(), 'data', 'demo.json');
-            const fileContents = await fs.readFile(filePath, 'utf8');
-            data = JSON.parse(fileContents);
-        } else {
-            // Fallback to static import if needed or handle other slugs
-            const dataMap: Record<string, any> = {
-                'demo': demoData
-            }
-            data = dataMap[slug]
-        }
-    } catch (e) {
-        console.error("Error reading demo.json:", e);
-        // Fallback
-        const dataMap: Record<string, any> = {
-            'demo': demoData
-        }
-        data = dataMap[slug]
-    }
+        // Dynamically load the JSON file matching the slug
+        const filePath = path.join(process.cwd(), 'data', `${slug}.json`);
+        const fileContents = await fs.readFile(filePath, 'utf8');
+        const data = JSON.parse(fileContents);
 
-    if (data) {
         return NextResponse.json(data)
-    } else {
+    } catch (e) {
+        console.error(`Error reading data for ${slug}:`, e);
         return NextResponse.json(
             { error: 'Business not found' },
             { status: 404 }
