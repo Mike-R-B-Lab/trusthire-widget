@@ -12,11 +12,15 @@ interface TrackingEvent {
 
 export const initGA = () => {
     // Only initialize if not already initialized
-    // react-ga4 handles this internally usually, but good to be safe or just call it 
     if (typeof window !== 'undefined') {
         console.log('Comparing IDs:', MEASUREMENT_ID);
-        ReactGA.initialize(MEASUREMENT_ID);
-        console.log('GA4 Initialized');
+        ReactGA.initialize(MEASUREMENT_ID, {
+            gtagOptions: {
+                cookie_flags: 'SameSite=None;Secure',
+                debug_mode: true
+            }
+        });
+        console.log('GA4 Initialized with iframe settings');
     }
 };
 
