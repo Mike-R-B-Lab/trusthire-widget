@@ -21,7 +21,11 @@ export async function GET(
         return NextResponse.json(data)
     } else {
         return NextResponse.json(
-            { error: 'Business not found' },
+            {
+                error: 'Business not found',
+                requestedSlug: slug,
+                availableSlugs: Object.keys(dataMap)
+            },
             { status: 404 }
         )
     }
