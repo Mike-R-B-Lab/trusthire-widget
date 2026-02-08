@@ -15,7 +15,7 @@ export function VerticalLauncher({ onOpen, onClose, isMobile }: VerticalLauncher
         >
             {/* Main Bar */}
             <div className={`transform-gpu flex flex-col items-center bg-white rounded-[22px] shadow-[0_2px_12px_rgba(0,0,0,0.08)] relative overflow-hidden select-none
-                ${isMobile ? 'px-[14px] pt-[18px] pb-[18px]' : 'px-[14px] pt-[22px] pb-[22px]'}`}
+                ${isMobile ? 'px-[10px] pt-[14px] pb-[14px]' : 'px-[14px] pt-[22px] pb-[22px]'}`}
             >
 
                 <div className="flex flex-col gap-[11px]">
