@@ -16,10 +16,12 @@ interface MinimizedBarProps {
 
 export function MinimizedBar({ onOpen, onClose, isMobile }: MinimizedBarProps) {
     return (
-        <div className="relative group/container flex flex-col items-center">
-            <button
-                onClick={onOpen}
-                className={`group flex items-center bg-white rounded-[24px] shadow-[0_2px_12px_rgba(0,0,0,0.08)] cursor-pointer relative overflow-visible select-none text-left
+        <div
+            onClick={onOpen}
+            className="relative group/container flex flex-col items-center cursor-pointer"
+        >
+            <div
+                className={`group flex items-center bg-white rounded-[24px] shadow-[0_2px_12px_rgba(0,0,0,0.08)] relative overflow-visible select-none text-left
             ${isMobile ? 'py-3 px-5' : 'py-4 px-6'}`}
             >
                 <div className={`flex flex-col gap-1.5`}>
@@ -83,16 +85,15 @@ export function MinimizedBar({ onOpen, onClose, isMobile }: MinimizedBarProps) {
                         </div>
                     </div>
                 </div>
-            </button>
+            </div>
 
             {/* Bottom Chevron Tab */}
-            <button
-                onClick={onOpen}
-                className="bg-white rounded-b-xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] pt-2.5 pb-0.5 px-[15px] -mt-2 z-[-1] flex items-center justify-center cursor-pointer hover:bg-gray-50 transition-colors"
+            <div
+                className="bg-white rounded-b-xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] pt-2.5 pb-0.5 px-[15px] -mt-2 z-[-1] flex items-center justify-center hover:bg-gray-50 transition-colors"
                 aria-label="Open widget"
             >
                 <ChevronDown size={18} className="text-gray-600" strokeWidth={2.5} />
-            </button>
+            </div>
         </div>
     )
 }
