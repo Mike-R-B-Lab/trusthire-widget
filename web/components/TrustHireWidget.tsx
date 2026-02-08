@@ -195,6 +195,7 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
     }, [slug])
 
     const handleOpen = () => {
+        console.log('Widget: handleOpen called')
         setIsOpen(true)
         trackWidgetOpen(variant, slug);
         window.parent.postMessage({ type: 'trusthire-resize', state: 'fullscreen' }, '*')
@@ -203,6 +204,7 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
     }
 
     const handleClose = () => {
+        console.log('Widget: handleClose called')
         setIsClosed(true)
         trackWidgetClose(variant, slug);
         window.parent.postMessage({ type: 'trusthire-resize', state: 'closed' }, '*')
@@ -218,6 +220,7 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
     }, [isOpen, isClosed])
 
     const handleMinimize = () => {
+        console.log('Widget: handleMinimize called')
         setIsOpen(false)
         trackWidgetClose(variant, slug);
         // We track 'minimize' (modal close) as the close event for analytics
