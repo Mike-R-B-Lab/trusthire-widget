@@ -13,6 +13,11 @@ interface TrackingEvent {
 export const initGA = () => {
     // Only initialize if not already initialized
     if (typeof window !== 'undefined') {
+        if (!MEASUREMENT_ID) {
+            console.log('GA4: No Measurement ID found, skipping initialization.');
+            return;
+        }
+
         console.log('Comparing IDs:', MEASUREMENT_ID);
         ReactGA.initialize(MEASUREMENT_ID, {
             gtagOptions: {
