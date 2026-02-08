@@ -217,6 +217,14 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
         }
     }, [isOpen, isClosed])
 
+    const handleMinimize = () => {
+        setIsOpen(false)
+        trackWidgetClose(variant, slug);
+        // We track 'minimize' (modal close) as the close event for analytics
+        window.parent.postMessage({ type: 'TRUSTHIRE_WIDGET_CLOSE', business_id: slug, variant }, '*')
+        window.parent.postMessage({ type: 'trusthire-resize', state: 'minimized' }, '*')
+    }
+
     if (isClosed) {
         return null
     }
@@ -244,7 +252,7 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
             {/* Full-screen darkened overlay */}
             <div
                 className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 animate-in fade-in duration-300"
-                onClick={() => setIsOpen(false)}
+                onClick={handleMinimize}
             />
 
             {/* Centered modal */}
@@ -268,7 +276,7 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
                             </div>
                         </div>
                         <button
-                            onClick={() => setIsOpen(false)}
+                            onClick={handleMinimize}
                             className="absolute right-4 text-gray-600 hover:bg-gray-100 rounded-full p-1.5 transition-colors"
                             aria-label="Close modal"
                         >
