@@ -1,6 +1,6 @@
 import ReactGA from 'react-ga4';
 
-const MEASUREMENT_ID = 'G-PE9XW2G3PY'; // TODO: Replace with actual Measurement ID
+const MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '';
 
 interface TrackingEvent {
     category: string;
