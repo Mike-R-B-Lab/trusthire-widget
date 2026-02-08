@@ -662,23 +662,7 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
                                             TrustHire est une plateforme de vérification indépendante qui regroupe des informations publiques sur les entreprises et les présente aux côtés de documents fournis directement par celles-ci. Les avis, accréditations, licences, détails d'assurance et exemples de travaux antérieurs sont affichés avec l'autorisation et le plein consentement de l'entreprise.
                                         </p>
                                         <p className="text-xs text-gray-600 leading-relaxed mb-2">
-                                            Les informations affichées par TrustHire sont présentées telles quelles et ne sont ni altérées ni modifiées. En organisant des informations vérifiées et clairement attribuées en un seul endroit, TrustHire aide les clients à mieux comprendre une entreprise lors de leurs prises de décision.{' '}
-                                            <a href="https://trusttabs.com" target="_blank" rel="noopener noreferrer" className="text-[#32BD5E] hover:underline font-medium">
-                                                En savoir plus
-                                            </a>
-                                        </p>
-                                    </div>
-
-                                    {/* Grey divider line */}
-                                    <div className="border-t border-gray-200"></div>
-
-                                    <div>
-                                        <h4 className="font-semibold text-sm text-gray-900 mb-1.5">Usage commercial</h4>
-                                        <p className="text-xs text-gray-600 leading-relaxed mb-2">
-                                            Vérification indépendante et présentation transparente des informations d'entreprise.{' '}
-                                            <a href="https://trusttabs.com/business" target="_blank" rel="noopener noreferrer" className="text-[#32BD5E] hover:underline font-medium">
-                                                Voir l'applicabilité
-                                            </a>
+                                            Les informations affichées par TrustHire sont présentées telles quelles et ne sont ni altérées ni modifiées. En organisant des informations vérifiées et clairement attribuées en un seul endroit, TrustHire aide les clients à mieux comprendre une entreprise lors de leurs prises de décision.
                                         </p>
                                     </div>
                                 </div>
