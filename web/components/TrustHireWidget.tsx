@@ -198,12 +198,16 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
         setIsOpen(true)
         trackWidgetOpen(variant, slug);
         window.parent.postMessage({ type: 'trusthire-resize', state: 'fullscreen' }, '*')
+        // New Analytics Message
+        window.parent.postMessage({ type: 'TRUSTHIRE_WIDGET_OPEN', business_id: slug, variant }, '*')
     }
 
     const handleClose = () => {
         setIsClosed(true)
         trackWidgetClose(variant, slug);
         window.parent.postMessage({ type: 'trusthire-resize', state: 'closed' }, '*')
+        // New Analytics Message
+        window.parent.postMessage({ type: 'TRUSTHIRE_WIDGET_CLOSE', business_id: slug, variant }, '*')
     }
 
     useEffect(() => {
