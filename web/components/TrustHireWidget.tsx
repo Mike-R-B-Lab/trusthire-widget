@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useMemo, useCallback } from 'react'
+import { useEffect, useState, useMemo, useCallback, useRef } from 'react'
 import { WidgetHeader } from './WidgetHeader'
 import { AccordionSection } from './AccordionSection'
 import { ProjectCard } from './ProjectCard'
@@ -72,6 +72,7 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
     const [visibleProjects, setVisibleProjects] = useState(2)
     const [visiblePosts, setVisiblePosts] = useState(1)
     const [isMobile, setIsMobile] = useState(false)
+    const startTimeRef = useRef<number | null>(null);
 
     // Initialize Analytics
     useEffect(() => {
@@ -196,20 +197,35 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
 
     const handleOpen = () => {
         console.log('Widget: handleOpen called')
+        startTimeRef.current = Date.now();
         setIsOpen(true)
         trackWidgetOpen(variant, slug);
         window.parent.postMessage({ type: 'trusthire-resize', state: 'fullscreen' }, '*')
         // New Analytics Message
-        window.parent.postMessage({ type: 'TRUSTHIRE_WIDGET_OPEN', business_id: slug, variant }, '*')
+        window.parent.postMessage({
+            type: 'TRUSTHIRE_WIDGET_OPEN',
+            business_id: slug,
+            variant,
+            timestamp: new Date().toISOString()
+        }, '*')
     }
 
     const handleClose = () => {
         console.log('Widget: handleClose called')
+        const now = Date.now();
+        const duration = startTimeRef.current ? (now - startTimeRef.current) / 1000 : 0;
+
         setIsClosed(true)
         trackWidgetClose(variant, slug);
         window.parent.postMessage({ type: 'trusthire-resize', state: 'closed' }, '*')
         // New Analytics Message
-        window.parent.postMessage({ type: 'TRUSTHIRE_WIDGET_CLOSE', business_id: slug, variant }, '*')
+        window.parent.postMessage({
+            type: 'TRUSTHIRE_WIDGET_CLOSE',
+            business_id: slug,
+            variant,
+            timestamp: new Date(now).toISOString(),
+            duration_seconds: duration
+        }, '*')
     }
 
     useEffect(() => {
@@ -221,10 +237,19 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
 
     const handleMinimize = () => {
         console.log('Widget: handleMinimize called')
+        const now = Date.now();
+        const duration = startTimeRef.current ? (now - startTimeRef.current) / 1000 : 0;
+
         setIsOpen(false)
         trackWidgetClose(variant, slug);
         // We track 'minimize' (modal close) as the close event for analytics
-        window.parent.postMessage({ type: 'TRUSTHIRE_WIDGET_CLOSE', business_id: slug, variant }, '*')
+        window.parent.postMessage({
+            type: 'TRUSTHIRE_WIDGET_CLOSE',
+            business_id: slug,
+            variant,
+            timestamp: new Date(now).toISOString(),
+            duration_seconds: duration
+        }, '*')
         window.parent.postMessage({ type: 'trusthire-resize', state: 'minimized' }, '*')
     }
 
