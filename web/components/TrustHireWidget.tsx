@@ -260,7 +260,7 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
     if (!isOpen) {
         if (variant === 'B') {
             return (
-                <div className={`fixed top-1/2 left-0 sm:left-4 -translate-y-1/2 z-50 ${isMobile ? 'scale-[0.75] origin-left' : ''}`}>
+                <div className={`fixed top-1/2 -translate-y-1/2 z-50 ${isMobile ? 'right-0 scale-[0.75] origin-right' : 'left-0 sm:left-4'}`}>
                     <VerticalLauncher onOpen={handleOpen} onClose={handleClose} isMobile={isMobile} />
                 </div>
             )
