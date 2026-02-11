@@ -268,7 +268,7 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
         // Default Variant A
         return (
             <div
-                className={`fixed top-0 right-0 sm:top-6 sm:right-6 z-50 ${isMobile ? 'scale-[0.72] origin-top-right' : ''}`}
+                className={`fixed top-0 right-0 top-3 right-3 z-50 ${isMobile ? 'scale-[0.72] origin-top-right' : ''}`}
             >
                 <MinimizedBar onOpen={handleOpen} onClose={handleClose} isMobile={isMobile} />
             </div>
