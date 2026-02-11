@@ -22,12 +22,12 @@ export function MinimizedBar({ onOpen, onClose, isMobile }: MinimizedBarProps) {
         >
             <div
                 className={`group flex items-center bg-white rounded-[24px] shadow-[0_2px_12px_rgba(0,0,0,0.08)] relative overflow-visible select-none text-left
-            ${isMobile ? 'py-3 px-5' : 'py-4 px-6'}`}
+            ${isMobile ? 'py-3 px-5' : 'py-4 px-4'}`}
             >
                 <div className={`flex flex-col gap-1.5`}>
                     {/* Header Row */}
                     <div className="flex items-center gap-1.5">
-                        <span className={`font-semibold text-gray-900 tracking-tight ${isMobile ? 'text-[13px]' : 'text-[14px]'}`}>
+                        <span className={`font-semibold text-gray-900 tracking-tight whitespace-nowrap ${isMobile ? 'text-[13px]' : 'text-[14px]'}`}>
                             Vérifié par TrustHire
                         </span>
                         <div className="w-6 h-6">
