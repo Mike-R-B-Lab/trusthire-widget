@@ -8,7 +8,8 @@ export default function EmbedPage({
     searchParams: { variant?: string }
 }) {
     const slug = params.slug
-    const variant = (searchParams?.variant === 'B') ? 'B' : 'A'
+    const variantParam = searchParams?.variant
+    const variant: 'A' | 'B' | 'D' = (variantParam === 'B' || variantParam === 'D') ? variantParam : 'A'
 
     return <TrustHireWidget slug={slug} variant={variant} />
 }

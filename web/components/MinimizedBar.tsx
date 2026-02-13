@@ -1,20 +1,13 @@
-import { ArrowRight, ShieldCheck, X } from 'lucide-react'
-
-interface MinimizedBarProps {
-    onOpen: () => void
-    onClose: () => void
-    isMobile: boolean
-}
-
 import { ChevronRight, ChevronDown, Check } from 'lucide-react'
 
 interface MinimizedBarProps {
     onOpen: () => void
     onClose: () => void
     isMobile: boolean
+    showChevron?: boolean
 }
 
-export function MinimizedBar({ onOpen, onClose, isMobile }: MinimizedBarProps) {
+export function MinimizedBar({ onOpen, onClose, isMobile, showChevron = true }: MinimizedBarProps) {
     return (
         <div
             onClick={onOpen}
@@ -88,12 +81,14 @@ export function MinimizedBar({ onOpen, onClose, isMobile }: MinimizedBarProps) {
             </div>
 
             {/* Bottom Chevron Tab */}
-            <div
-                className="bg-white rounded-b-xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] pt-2.5 pb-0.5 px-[15px] -mt-2 z-[-1] flex items-center justify-center hover:bg-gray-50 transition-colors"
-                aria-label="Open widget"
-            >
-                <ChevronDown size={18} className="text-gray-600" strokeWidth={2.5} />
-            </div>
+            {showChevron && (
+                <div
+                    className="bg-white rounded-b-xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] pt-2.5 pb-0.5 px-[15px] -mt-2 z-[-1] flex items-center justify-center hover:bg-gray-50 transition-colors"
+                    aria-label="Open widget"
+                >
+                    <ChevronDown size={18} className="text-gray-600" strokeWidth={2.5} />
+                </div>
+            )}
         </div>
     )
 }

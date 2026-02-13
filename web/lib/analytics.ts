@@ -42,7 +42,7 @@ export const trackEvent = ({ category, action, label, value, ...rest }: Tracking
     }
 };
 
-export const trackWidgetView = (variant: 'A' | 'B', slug: string) => {
+export const trackWidgetView = (variant: 'A' | 'B' | 'D', slug: string) => {
     trackEvent({
         category: 'Widget',
         action: 'View',
@@ -52,7 +52,7 @@ export const trackWidgetView = (variant: 'A' | 'B', slug: string) => {
     });
 };
 
-export const trackWidgetOpen = (variant: 'A' | 'B', slug: string) => {
+export const trackWidgetOpen = (variant: 'A' | 'B' | 'D', slug: string) => {
     trackEvent({
         category: 'Widget',
         action: 'Open',
@@ -62,7 +62,7 @@ export const trackWidgetOpen = (variant: 'A' | 'B', slug: string) => {
     });
 };
 
-export const trackWidgetClose = (variant: 'A' | 'B', slug: string) => {
+export const trackWidgetClose = (variant: 'A' | 'B' | 'D', slug: string) => {
     trackEvent({
         category: 'Widget',
         action: 'Close',

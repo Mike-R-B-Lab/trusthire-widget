@@ -60,7 +60,7 @@ interface SocialPost {
 
 interface TrustHireWidgetProps {
     slug: string
-    variant?: 'A' | 'B'
+    variant?: 'A' | 'B' | 'D'
 }
 
 export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
@@ -265,12 +265,12 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
                 </div>
             )
         }
-        // Default Variant A
+        // Default Variant A or D
         return (
             <div
                 className={`fixed top-0 right-0 top-3 right-3 z-50 ${isMobile ? 'scale-[0.72] origin-top-right' : ''}`}
             >
-                <MinimizedBar onOpen={handleOpen} onClose={handleClose} isMobile={isMobile} />
+                <MinimizedBar onOpen={handleOpen} onClose={handleClose} isMobile={isMobile} showChevron={variant !== 'D'} />
             </div>
         )
     }
