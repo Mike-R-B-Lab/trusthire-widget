@@ -12,6 +12,7 @@ export function MinimizedBar({ onOpen, onClose, isMobile, showChevron = true }: 
         <div
             onClick={onOpen}
             className="relative group/container flex flex-col items-center cursor-pointer"
+            style={isMobile ? { transform: 'scale(1.8)', transformOrigin: 'center' } : {}}
         >
             <div
                 className={`group flex items-center bg-white rounded-[24px] shadow-[0_2px_12px_rgba(0,0,0,0.08)] relative overflow-visible select-none text-left
