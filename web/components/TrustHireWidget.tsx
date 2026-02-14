@@ -235,6 +235,19 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
         }
     }, [isOpen, isClosed])
 
+    // Listen for auto-open message (for Variant D overlay)
+    useEffect(() => {
+        function handleMessage(event: MessageEvent) {
+            if (event.data.type === 'TRUSTHIRE_AUTO_OPEN') {
+                console.log('Widget: Received auto-open message, expanding...');
+                handleOpen();
+            }
+        }
+
+        window.addEventListener('message', handleMessage);
+        return () => window.removeEventListener('message', handleMessage);
+    }, []);
+
     const handleMinimize = () => {
         console.log('Widget: handleMinimize called')
         const now = Date.now();
