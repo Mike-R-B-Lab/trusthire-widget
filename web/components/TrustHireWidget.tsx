@@ -49,6 +49,7 @@ interface BusinessInfo {
     incorporationNumber?: string
     warranty?: string
     insuredAmount?: string
+    employees?: number
     rbq?: {
         number: string
         url: string
@@ -182,6 +183,7 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
                     incorporationNumber: data.incorporationNumber,
                     warranty: data.warranty,
                     insuredAmount: data.insuredAmount,
+                    employees: data.employees,
                     rbq: data.rbq,
                     insurance: data.insurance
                 })
@@ -520,7 +522,7 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
 
                                     <div className="bg-gray-50 rounded-lg p-2 border border-gray-100">
                                         <p className="text-[10px] text-gray-500 mb-0.5">Nombre d'employés</p>
-                                        <p className="font-semibold text-sm text-gray-900">12</p>
+                                        <p className="font-semibold text-sm text-gray-900">{businessInfo.employees || 12}</p>
                                     </div>
 
                                     {businessInfo.owners && (

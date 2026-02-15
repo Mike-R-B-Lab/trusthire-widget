@@ -5,7 +5,8 @@
     "owners": "Mathieu Gagnon",
     "serviceArea": "NDG, Westmount, Montreal West and Lasalle",
     "incorporationNumber": "2279328118",
-    "warranty": "",
+    "warranty": "3 ans",
+    "employees": 25,
     "insuredAmount": "$5,000,000",
     "rbq": {
         "number": "8341-9762-24",
@@ -16,7 +17,18 @@
         "url": "https://bkifg.com/",
         "amount": "$5,000,000"
     },
-    "socialPosts": [],
+    "socialPosts": [
+        {
+            "url": "/ndg-social-1.jpg",
+            "height": 550,
+            "containerHeight": 550
+        },
+        {
+            "url": "/ndg-social-2.jpg",
+            "height": 550,
+            "containerHeight": 550
+        }
+    ],
     "videos": [],
     "featuredReviews": [
         {
