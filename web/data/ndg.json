@@ -52,7 +52,7 @@
             "content": "Embedded Review",
             "embedUrl": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Farielle.menard%2Fposts%2Fpfbid0oJ6ssoBo1rcyPGkw1mseLHRcCBksdJnHQhqAQWfsoaWWcjMn7XxqQNmULQQQy2Vjl&show_text=true&width=500",
             "embedHeight": 189,
-            "embedScale": 0.15,
+            "embedScale": 0.85,
             "source": "Facebook"
         },
         {
@@ -63,7 +63,7 @@
             "content": "Embedded Review",
             "embedUrl": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid02ZLCWxpp6diC3RXDL4C9DjwwqUdonUt6FTvLjbHU71kHQyVmtJy3F33y5WofpmiAQl%26id%3D100067146322084&show_text=true&width=500",
             "embedHeight": 166,
-            "embedScale": 0.15,
+            "embedScale": 0.85,
             "source": "Facebook"
         },
         {
@@ -74,7 +74,7 @@
             "content": "Embedded Review",
             "embedUrl": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmichael.laberge.9%2Fposts%2Fpfbid04irvfUdUaZsS6cmZiuBgsARKsa5qUZMCnmUCtEDP5asDGhp5wkfQZai2FSnd5HaDl&show_text=true&width=500",
             "embedHeight": 194,
-            "embedScale": 0.15,
+            "embedScale": 0.85,
             "source": "Facebook"
         }
     ],
