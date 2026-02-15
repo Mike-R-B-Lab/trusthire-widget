@@ -503,6 +503,71 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
                                 />
                             </AccordionSection>
 
+                            {/* Video Gallery Accordion */}
+                            <AccordionSection
+                                title="Galerie vidéo"
+                                icon={<VideoIcon className="text-[#32BD5E]" size={20} />}
+                                verified={true}
+                                onToggle={setIsVideoGalleryOpen}
+                            >
+                                <div className="space-y-0 relative group">
+                                    {videos && videos.length > 0 ? (
+                                        <>
+                                            <div className="relative pb-3">
+                                                <div className="px-1 is-carousel-slide">
+                                                    <VideoCard
+                                                        video={videos[currentVideoIndex]}
+                                                        isActive={isVideoGalleryOpen}
+                                                    />
+                                                </div>
+
+                                                {/* Navigation Arrows */}
+                                                {videos.length > 1 && (
+                                                    <>
+                                                        <button
+                                                            onClick={(e) => {
+                                                                e.stopPropagation()
+                                                                setCurrentVideoIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1))
+                                                            }}
+                                                            className="absolute left-2 top-1/2 -translate-y-8 bg-gray-100 p-1.5 rounded-full hover:bg-gray-200 text-gray-600 transition-colors z-10 backdrop-blur-sm"
+                                                        >
+                                                            <ChevronLeft size={20} />
+                                                        </button>
+                                                        <button
+                                                            onClick={(e) => {
+                                                                e.stopPropagation()
+                                                                setCurrentVideoIndex((prev) => (prev === videos.length - 1 ? 0 : prev + 1))
+                                                            }}
+                                                            className="absolute right-2 top-1/2 -translate-y-8 bg-gray-100 p-1.5 rounded-full hover:bg-gray-200 text-gray-600 transition-colors z-10 backdrop-blur-sm"
+                                                        >
+                                                            <ChevronRight size={20} />
+                                                        </button>
+                                                    </>
+                                                )}
+                                            </div>
+
+                                            {/* Carousel Dots */}
+                                            {videos.length > 1 && (
+                                                <div className="flex justify-center gap-2 mt-2">
+                                                    {videos.map((_, index) => (
+                                                        <button
+                                                            key={index}
+                                                            onClick={() => setCurrentVideoIndex(index)}
+                                                            className={`w-2 h-2 rounded-full transition-colors ${index === currentVideoIndex ? 'bg-[#32BD5E]' : 'bg-gray-300 hover:bg-gray-400'}`}
+                                                            aria-label={`Go to video ${index + 1}`}
+                                                        />
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </>
+                                    ) : (
+                                        <div className="text-center py-8 text-gray-500 text-sm">
+                                            Video coming soon
+                                        </div>
+                                    )}
+                                </div>
+                            </AccordionSection>
+
                             {/* About the Business Accordion */}
                             <AccordionSection
                                 title="L'entreprise"
@@ -609,71 +674,6 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
                                     ) : (
                                         <div className="text-center py-8 text-gray-500 text-sm">
                                             No posts available
-                                        </div>
-                                    )}
-                                </div>
-                            </AccordionSection>
-
-                            {/* Video Gallery Accordion */}
-                            <AccordionSection
-                                title="Galerie vidéo"
-                                icon={<VideoIcon className="text-[#32BD5E]" size={20} />}
-                                verified={true}
-                                onToggle={setIsVideoGalleryOpen}
-                            >
-                                <div className="space-y-0 relative group">
-                                    {videos && videos.length > 0 ? (
-                                        <>
-                                            <div className="relative pb-3">
-                                                <div className="px-1 is-carousel-slide">
-                                                    <VideoCard
-                                                        video={videos[currentVideoIndex]}
-                                                        isActive={isVideoGalleryOpen}
-                                                    />
-                                                </div>
-
-                                                {/* Navigation Arrows */}
-                                                {videos.length > 1 && (
-                                                    <>
-                                                        <button
-                                                            onClick={(e) => {
-                                                                e.stopPropagation()
-                                                                setCurrentVideoIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1))
-                                                            }}
-                                                            className="absolute left-2 top-1/2 -translate-y-8 bg-gray-100 p-1.5 rounded-full hover:bg-gray-200 text-gray-600 transition-colors z-10 backdrop-blur-sm"
-                                                        >
-                                                            <ChevronLeft size={20} />
-                                                        </button>
-                                                        <button
-                                                            onClick={(e) => {
-                                                                e.stopPropagation()
-                                                                setCurrentVideoIndex((prev) => (prev === videos.length - 1 ? 0 : prev + 1))
-                                                            }}
-                                                            className="absolute right-2 top-1/2 -translate-y-8 bg-gray-100 p-1.5 rounded-full hover:bg-gray-200 text-gray-600 transition-colors z-10 backdrop-blur-sm"
-                                                        >
-                                                            <ChevronRight size={20} />
-                                                        </button>
-                                                    </>
-                                                )}
-                                            </div>
-
-                                            {/* Carousel Dots */}
-                                            {videos.length > 1 && (
-                                                <div className="flex justify-center gap-2 mt-2">
-                                                    {videos.map((_, index) => (
-                                                        <button
-                                                            key={index}
-                                                            onClick={() => setCurrentVideoIndex(index)}
-                                                            className={`w-2 h-2 rounded-full transition-colors ${index === currentVideoIndex ? 'bg-[#32BD5E]' : 'bg-gray-300 hover:bg-gray-400'}`}
-                                                            aria-label={`Go to video ${index + 1}`}
-                                                        />
-                                                    ))}
-                                                </div>
-                                            )}
-                                        </>
-                                    ) : (
-                                        <div className="text-center py-8 text-gray-500 text-sm">
-                                            Video coming soon
                                         </div>
                                     )}
                                 </div>
