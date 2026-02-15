@@ -49,6 +49,15 @@ interface BusinessInfo {
     incorporationNumber?: string
     warranty?: string
     insuredAmount?: string
+    rbq?: {
+        number: string
+        url: string
+    }
+    insurance?: {
+        provider: string
+        url: string
+        amount: string
+    }
 }
 
 interface SocialPost {
@@ -172,7 +181,9 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
                     serviceArea: data.serviceArea,
                     incorporationNumber: data.incorporationNumber,
                     warranty: data.warranty,
-                    insuredAmount: data.insuredAmount
+                    insuredAmount: data.insuredAmount,
+                    rbq: data.rbq,
+                    insurance: data.insurance
                 })
 
                 if (data.featuredReviews) {
@@ -485,6 +496,8 @@ export function TrustHireWidget({ slug, variant = 'A' }: TrustHireWidgetProps) {
                                     incorporationNumber={businessInfo.incorporationNumber}
                                     warranty={businessInfo.warranty}
                                     insuredAmount={businessInfo.insuredAmount}
+                                    rbq={businessInfo.rbq}
+                                    insurance={businessInfo.insurance}
                                 />
                             </AccordionSection>
 

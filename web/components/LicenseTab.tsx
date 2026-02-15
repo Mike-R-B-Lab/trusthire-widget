@@ -5,9 +5,18 @@ interface LicenseTabProps {
     incorporationNumber?: string
     warranty?: string
     insuredAmount?: string
+    rbq?: {
+        number: string
+        url: string
+    }
+    insurance?: {
+        provider: string
+        url: string
+        amount: string
+    }
 }
 
-export function LicenseTab({ incorporationNumber, warranty, insuredAmount }: LicenseTabProps) {
+export function LicenseTab({ incorporationNumber, warranty, insuredAmount, rbq, insurance }: LicenseTabProps) {
     const [copied, setCopied] = useState(false)
     return (
         <div className="space-y-0">
@@ -43,11 +52,40 @@ export function LicenseTab({ incorporationNumber, warranty, insuredAmount }: Lic
                 </div>
             </div>
 
+            {/* RBQ (Régie du bâtiment du Québec) */}
+            {rbq && (
+                <div className="py-2 border-b border-gray-200">
+                    <div className="flex items-center justify-between">
+                        <span className="text-[13px] font-medium text-gray-600">RBQ</span>
+                        <a
+                            href={rbq.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs text-blue-600 hover:text-blue-800 hover:underline"
+                        >
+                            {rbq.number}
+                        </a>
+                    </div>
+                </div>
+            )}
+
             {/* Insurance */}
             <div className="py-2 border-b border-gray-200">
                 <div className="flex items-center justify-between">
                     <span className="text-[13px] font-medium text-gray-600">Assurance</span>
-                    {insuredAmount ? (
+                    {insurance ? (
+                        <div className="flex items-center gap-1">
+                            <a
+                                href={insurance.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs text-blue-600 hover:text-blue-800 hover:underline"
+                            >
+                                {insurance.provider}
+                            </a>
+                            <span className="text-xs text-gray-500">- {insurance.amount}</span>
+                        </div>
+                    ) : insuredAmount ? (
                         <div className="flex items-center gap-1">
                             <a
                                 href="http://lunique.qc.ca"
@@ -66,12 +104,14 @@ export function LicenseTab({ incorporationNumber, warranty, insuredAmount }: Lic
             </div>
 
             {/* Warranty */}
-            <div className="py-2">
-                <div className="flex items-center justify-between">
-                    <span className="text-[13px] font-medium text-gray-600">Garantie</span>
-                    <span className="text-xs text-gray-500 w-[180px] text-right leading-tight">{warranty || 'N/A'}</span>
+            {warranty && (
+                <div className="py-2">
+                    <div className="flex items-center justify-between">
+                        <span className="text-[13px] font-medium text-gray-600">Garantie</span>
+                        <span className="text-xs text-gray-500 w-[180px] text-right leading-tight">{warranty}</span>
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     )
 }
