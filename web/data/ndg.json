@@ -29,7 +29,20 @@
             "containerHeight": 550
         }
     ],
-    "videos": [],
+    "videos": [
+        {
+            "id": "1",
+            "title": "Extérieur maison",
+            "url": "/videos/ndg_ext_maison.mp4",
+            "duration": "0:30"
+        },
+        {
+            "id": "2",
+            "title": "Extérieur deck",
+            "url": "/videos/ndg_ext_deck.mp4",
+            "duration": "0:30"
+        }
+    ],
     "featuredReviews": [
         {
             "id": "1",
@@ -44,6 +57,17 @@
         },
         {
             "id": "2",
+            "author": "Client",
+            "rating": 5,
+            "date": "Recent",
+            "content": "Embedded Review",
+            "embedUrl": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%3Fstory_fbid%3Dpfbid02ZLCWxpp6diC3RXDL4C9DjwwqUdonUt6FTvLjbHU71kHQyVmtJy3F33y5WofpmiAQl%26id%3D100067146322084&show_text=true&width=500",
+            "embedHeight": 166,
+            "embedScale": 1.0,
+            "source": "Facebook"
+        },
+        {
+            "id": "3",
             "author": "Michael Laberge",
             "rating": 5,
             "date": "Apr 23, 2025",
@@ -85,7 +109,7 @@
             "id": "facebook",
             "name": "Facebook",
             "rating": 0,
-            "count": 5,
+            "count": 8,
             "customRating": "100%",
             "color": "bg-blue-600",
             "url": "https://www.facebook.com/ndgstudentpainters/reviews/?id=100063670411901&sk=reviews",
